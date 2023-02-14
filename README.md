@@ -1,2 +1,9 @@
 # Metawal-IA
-Metawal IA project repository
+
+
+## Modèle objet
+
+Les sources commentées du modèle objet sont dans [./models/](./models).
+
+![](./models/uml_diagram.svg)
+

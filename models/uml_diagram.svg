@@ -1,0 +1,254 @@
+<svg version="1.1" baseProfile="full" width="1362.0" height="541.0" viewbox="0 0 1362 541" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[&lt;type&gt;PersonalProfile|+uri: string;+contactInfo: ContactInfo;+userTypes: UserType\[\];+tagsOfInterest: string\[\];+searchHistory: SearchHistoryItem\[\];+browseHistory: BrowseHistoryItem\[\];+downloadHistory: DownloadHistoryItem\[\];+savedMaps: MapContext\[\]|]
+[&lt;type&gt;ContactInfo|+name: string;+address: string \| undefined;+telephone: string \| undefined|]
+[&lt;type&gt;MapContext|+uri: string;+name: string \| undefined;+layers: LayerDescriptor\[\];+bbox: \[number, number, number, number\]|]
+[&lt;type&gt;LayerDescriptor|+uri: string;+layerName: string \| undefined;+serviceUrl: string \| undefined;+style: string \| undefined|]
+[&lt;type&gt;SearchHistoryItem|+timestamp: number;+searchstring: string|]
+[&lt;type&gt;BrowseHistoryItem|+timestamp: number;+datasetUri: string|]
+[&lt;type&gt;DownloadHistoryItem|+timestamp: number;+datasetUri: string;+bbox: string|]
+[PersonalProfile]  -  [ContactInfo]
+[PersonalProfile]  - 0..* [SearchHistoryItem]
+[PersonalProfile]  - 0..* [BrowseHistoryItem]
+[PersonalProfile]  - 0..* [DownloadHistoryItem]
+[PersonalProfile]  - 0..* [MapContext]
+[MapContext]  - 0..* [LayerDescriptor]
+[&lt;type&gt;DatasetRecommendation|+timestamp: number;+datasetUri: string;+score: number|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g transform="translate(0.5, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="541.0" width="1362.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<path d="M605.0 115.9 L126.5 195 L126.5 222.5 L126.5 222.5 " fill="none"></path>
+<text x="742.0" y="222.0" stroke="none">0..*</text>
+<path d="M777.0 175.0 L777 195 L777 230 L777.0 230.0 " fill="none"></path>
+<text x="1002.5" y="222.0" stroke="none">0..*</text>
+<path d="M949.0 172.5 L994.5 195 L994.5 230 L994.5 230.0 " fill="none"></path>
+<text x="1222.5" y="214.5" stroke="none">0..*</text>
+<path d="M949.0 129.8 L1214.5 195 L1214.5 222.5 L1214.5 222.5 " fill="none"></path>
+<text x="435.5" y="207.0" stroke="none">0..*</text>
+<path d="M605.0 147.8 L470.5 195 L470.5 215 L470.5 215.0 " fill="none"></path>
+<text x="435.5" y="362.0" stroke="none">0..*</text>
+<path d="M470.5 330.0 L470.5 350 L470.5 370 L470.5 370.0 " fill="none"></path>
+<g data-name="PersonalProfile">
+<g fill="lightgray" stroke="#33322E" data-name="PersonalProfile">
+<rect x="605.0" y="0.0" height="175.0" width="344.0" data-name="PersonalProfile"></rect>
+<path d="M605.0 31.0 L949.0 31.0" fill="none" data-name="PersonalProfile"></path>
+<path d="M605.0 167.0 L949.0 167.0" fill="none" data-name="PersonalProfile"></path>
+</g>
+<g transform="translate(605, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalProfile">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PersonalProfile">
+<a id="PersonalProfile.ts.PersonalProfile" xlink:href="PersonalProfile.ts"><text x="164.0" y="13.5" stroke="none" text-anchor="middle" data-name="PersonalProfile">PersonalProfile</text></a>
+
+</g>
+</g>
+<g transform="translate(605, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalProfile">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PersonalProfile">
+<text x="0.0" y="13.5" stroke="none" data-name="PersonalProfile">+uri: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PersonalProfile">+contactInfo: ContactInfo</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PersonalProfile">+userTypes: UserType[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PersonalProfile">+tagsOfInterest: string[]</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PersonalProfile">+searchHistory: SearchHistoryItem[]</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PersonalProfile">+browseHistory: BrowseHistoryItem[]</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PersonalProfile">+downloadHistory: DownloadHistoryItem[]</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PersonalProfile">+savedMaps: MapContext[]</text>
+
+</g>
+</g>
+<g transform="translate(605, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalProfile">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PersonalProfile">
+
+</g>
+</g>
+</g>
+<g data-name="ContactInfo">
+<g fill="lightgray" stroke="#33322E" data-name="ContactInfo">
+<rect x="0.0" y="223.0" height="100.0" width="253.0" data-name="ContactInfo"></rect>
+<path d="M0.0 254.0 L253.0 254.0" fill="none" data-name="ContactInfo"></path>
+<path d="M0.0 315.0 L253.0 315.0" fill="none" data-name="ContactInfo"></path>
+</g>
+<g transform="translate(0, 223)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ContactInfo">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ContactInfo">
+<a id="PersonalProfile.ts.ContactInfo" xlink:href="PersonalProfile.ts"><text x="118.5" y="13.5" stroke="none" text-anchor="middle" data-name="ContactInfo">ContactInfo</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 254)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ContactInfo">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ContactInfo">
+<text x="0.0" y="13.5" stroke="none" data-name="ContactInfo">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ContactInfo">+address: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ContactInfo">+telephone: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(0, 315)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ContactInfo">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ContactInfo">
+
+</g>
+</g>
+</g>
+<g data-name="MapContext">
+<g fill="lightgray" stroke="#33322E" data-name="MapContext">
+<rect x="293.0" y="215.0" height="115.0" width="355.0" data-name="MapContext"></rect>
+<path d="M293.0 246.0 L648.0 246.0" fill="none" data-name="MapContext"></path>
+<path d="M293.0 322.0 L648.0 322.0" fill="none" data-name="MapContext"></path>
+</g>
+<g transform="translate(293, 215)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MapContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="MapContext">
+<a id="PersonalProfile.ts.MapContext" xlink:href="PersonalProfile.ts"><text x="169.5" y="13.5" stroke="none" text-anchor="middle" data-name="MapContext">MapContext</text></a>
+
+</g>
+</g>
+<g transform="translate(293, 246)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MapContext">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MapContext">
+<text x="0.0" y="13.5" stroke="none" data-name="MapContext">+uri: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="MapContext">+name: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="MapContext">+layers: LayerDescriptor[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="MapContext">+bbox: [number, number, number, number]</text>
+
+</g>
+</g>
+<g transform="translate(293, 322)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MapContext">
+<g transform="translate(8, 8)" fill="#33322E" data-name="MapContext">
+
+</g>
+</g>
+</g>
+<g data-name="LayerDescriptor">
+<g fill="lightgray" stroke="#33322E" data-name="LayerDescriptor">
+<rect x="341.0" y="370.0" height="115.0" width="259.0" data-name="LayerDescriptor"></rect>
+<path d="M341.0 401.0 L600.0 401.0" fill="none" data-name="LayerDescriptor"></path>
+<path d="M341.0 477.0 L600.0 477.0" fill="none" data-name="LayerDescriptor"></path>
+</g>
+<g transform="translate(341, 370)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LayerDescriptor">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LayerDescriptor">
+<a id="PersonalProfile.ts.LayerDescriptor" xlink:href="PersonalProfile.ts"><text x="121.5" y="13.5" stroke="none" text-anchor="middle" data-name="LayerDescriptor">LayerDescriptor</text></a>
+
+</g>
+</g>
+<g transform="translate(341, 401)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LayerDescriptor">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LayerDescriptor">
+<text x="0.0" y="13.5" stroke="none" data-name="LayerDescriptor">+uri: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="LayerDescriptor">+layerName: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="LayerDescriptor">+serviceUrl: string | undefined</text>
+<text x="0.0" y="58.5" stroke="none" data-name="LayerDescriptor">+style: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(341, 477)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LayerDescriptor">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LayerDescriptor">
+
+</g>
+</g>
+</g>
+<g data-name="SearchHistoryItem">
+<g fill="lightgray" stroke="#33322E" data-name="SearchHistoryItem">
+<rect x="688.0" y="230.0" height="85.0" width="178.0" data-name="SearchHistoryItem"></rect>
+<path d="M688.0 261.0 L866.0 261.0" fill="none" data-name="SearchHistoryItem"></path>
+<path d="M688.0 307.0 L866.0 307.0" fill="none" data-name="SearchHistoryItem"></path>
+</g>
+<g transform="translate(688, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SearchHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="SearchHistoryItem">
+<a id="PersonalProfile.ts.SearchHistoryItem" xlink:href="PersonalProfile.ts"><text x="81.0" y="13.5" stroke="none" text-anchor="middle" data-name="SearchHistoryItem">SearchHistoryItem</text></a>
+
+</g>
+</g>
+<g transform="translate(688, 261)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SearchHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="SearchHistoryItem">
+<text x="0.0" y="13.5" stroke="none" data-name="SearchHistoryItem">+timestamp: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="SearchHistoryItem">+searchstring: string</text>
+
+</g>
+</g>
+<g transform="translate(688, 307)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SearchHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" data-name="SearchHistoryItem">
+
+</g>
+</g>
+</g>
+<g data-name="BrowseHistoryItem">
+<g fill="lightgray" stroke="#33322E" data-name="BrowseHistoryItem">
+<rect x="906.0" y="230.0" height="85.0" width="177.0" data-name="BrowseHistoryItem"></rect>
+<path d="M906.0 261.0 L1083.0 261.0" fill="none" data-name="BrowseHistoryItem"></path>
+<path d="M906.0 307.0 L1083.0 307.0" fill="none" data-name="BrowseHistoryItem"></path>
+</g>
+<g transform="translate(906, 230)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BrowseHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="BrowseHistoryItem">
+<a id="PersonalProfile.ts.BrowseHistoryItem" xlink:href="PersonalProfile.ts"><text x="80.5" y="13.5" stroke="none" text-anchor="middle" data-name="BrowseHistoryItem">BrowseHistoryItem</text></a>
+
+</g>
+</g>
+<g transform="translate(906, 261)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BrowseHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="BrowseHistoryItem">
+<text x="0.0" y="13.5" stroke="none" data-name="BrowseHistoryItem">+timestamp: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="BrowseHistoryItem">+datasetUri: string</text>
+
+</g>
+</g>
+<g transform="translate(906, 307)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="BrowseHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" data-name="BrowseHistoryItem">
+
+</g>
+</g>
+</g>
+<g data-name="DownloadHistoryItem">
+<g fill="lightgray" stroke="#33322E" data-name="DownloadHistoryItem">
+<rect x="1123.0" y="223.0" height="100.0" width="183.0" data-name="DownloadHistoryItem"></rect>
+<path d="M1123.0 254.0 L1306.0 254.0" fill="none" data-name="DownloadHistoryItem"></path>
+<path d="M1123.0 315.0 L1306.0 315.0" fill="none" data-name="DownloadHistoryItem"></path>
+</g>
+<g transform="translate(1123, 223)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DownloadHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DownloadHistoryItem">
+<a id="PersonalProfile.ts.DownloadHistoryItem" xlink:href="PersonalProfile.ts"><text x="83.5" y="13.5" stroke="none" text-anchor="middle" data-name="DownloadHistoryItem">DownloadHistoryItem</text></a>
+
+</g>
+</g>
+<g transform="translate(1123, 254)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DownloadHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DownloadHistoryItem">
+<text x="0.0" y="13.5" stroke="none" data-name="DownloadHistoryItem">+timestamp: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="DownloadHistoryItem">+datasetUri: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="DownloadHistoryItem">+bbox: string</text>
+
+</g>
+</g>
+<g transform="translate(1123, 315)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DownloadHistoryItem">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DownloadHistoryItem">
+
+</g>
+</g>
+</g>
+<g data-name="DatasetRecommendation">
+<g fill="lightgray" stroke="#33322E" data-name="DatasetRecommendation">
+<rect x="989.0" y="38.0" height="100.0" width="215.0" data-name="DatasetRecommendation"></rect>
+<path d="M989.0 69.0 L1204.0 69.0" fill="none" data-name="DatasetRecommendation"></path>
+<path d="M989.0 130.0 L1204.0 130.0" fill="none" data-name="DatasetRecommendation"></path>
+</g>
+<g transform="translate(989, 38)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DatasetRecommendation">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DatasetRecommendation">
+<a id="Recommendation.ts.DatasetRecommendation" xlink:href="Recommendation.ts"><text x="99.5" y="13.5" stroke="none" text-anchor="middle" data-name="DatasetRecommendation">DatasetRecommendation</text></a>
+
+</g>
+</g>
+<g transform="translate(989, 69)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DatasetRecommendation">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DatasetRecommendation">
+<text x="0.0" y="13.5" stroke="none" data-name="DatasetRecommendation">+timestamp: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="DatasetRecommendation">+datasetUri: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="DatasetRecommendation">+score: number</text>
+
+</g>
+</g>
+<g transform="translate(989, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DatasetRecommendation">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DatasetRecommendation">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,14 @@
+{
+    "name": "Metawal-IA",
+    "version": "0.0.1",
+    "description": "Metawal IA Project",
+    "private": true,
+    "scripts": {
+        "format": "prettier --write --ignore-unknown \"{config,public,src}/**/*.{html,css,js,ts,json}\"",
+        "uml": "npx tsuml2 -m --glob \"./models/*.ts\" -o ./models/uml_diagram.svg"
+    },
+    "devDependencies": {
+        "typescript": "^4.6.3"
+    },
+    "dependencies": {}
+}
