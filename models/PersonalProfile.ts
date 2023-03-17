@@ -3,20 +3,36 @@
  */
 export type PersonalProfile = {
 
+  /**
+   * Identifiant unique de l'utilisateur
+   */
   uri: string;
 
+  /**
+   * Informations de contact
+   */
   contactInfo: ContactInfo,
+
+  /**
+   * Code ULIS (pour les agents du SPW)
+   */
+  ULIS?: string,
 
   /**
    * liste des catégories de cet utilisateur
    * */
-  userTypes: UserType[],
+  userCategories: UserCategory[],
 
   /**
    * liste de tags ou mots-clés d'intérêt pour l'utilisateur.
    * Plain text, ou URIs d'éléments d'ontologie (INSPIRE, ...)
    * */
   tagsOfInterest: string[],
+
+  /**
+   * Date de la dernière visite (ISO format)
+   */
+  lastVisit: string,
 
   /**
    * L'historique de recherche de l'utilisateur
@@ -44,7 +60,7 @@ export type PersonalProfile = {
 /**
  * Les catégories selon lesquelles un utilisateur peut se qualifier
  * */
-export type UserType = 'Chercheur' | 'Architecte' | 'Notaire' /* | ... TODO */
+export type UserCategory = 'Chercheur' | 'Architecte' | 'Notaire' /* | ... TODO */
 
 
 /**
