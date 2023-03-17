@@ -134,7 +134,7 @@ export type LayerDescriptor = {
 export type SearchHistoryItem = {
 
   /** date de la recherche */
-  timestamp: number,
+  timestamp: string,
 
   /** termes de recherche */
   searchstring: string
@@ -150,7 +150,7 @@ export type SearchHistoryItem = {
 export type BrowseHistoryItem = {
 
   /** date de la consultation */
-  timestamp: number,
+  timestamp: string,
 
   /** URI du dataset consulté */
   datasetUri: string
@@ -164,7 +164,7 @@ export type BrowseHistoryItem = {
 export type DownloadHistoryItem = {
 
   /** date du téléchargement */
-  timestamp: number,
+  timestamp: string,
 
   /** URI du dataset téléchargé */
   datasetUri: string,
