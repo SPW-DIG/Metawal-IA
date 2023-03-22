@@ -1,0 +1,1100 @@
+<csw:GetRecordsResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/a978cb02-e25a-4adb-b6bd-f0eec5c665e7"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2019-10-14</dct:issued>
+                <dct:modified>2019-10-14</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/a978cb02-e25a-4adb-b6bd-f0eec5c665e7">
+                <dct:identifier>a978cb02-e25a-4adb-b6bd-f0eec5c665e7</dct:identifier>
+                <dct:title>Centres Publics d’Action Sociale (CPAS) de Wallonie Francophone - Service de visualisation WMS</dct:title>
+                <dct:abstract>Ce service de visualisation WMS permet de consulter la couches de données "Centres Publics d’Action Sociale (CPAS) de Wallonie Francophone".</dct:abstract>
+                <dcat:keyword>CPAS</dcat:keyword>
+                <dcat:keyword>Action Sociale</dcat:keyword>
+                <dcat:keyword>Aide Sociale</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/6010"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/60"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes/concepts/administration"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes/concepts/aspects%20sociaux%2C%20population"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/repr%C3%A9sentation%20sociale"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/politique%20sociale"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/aide%20sociale"/>
+                <dcat:theme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/Mots-cl%C3%A9s%20InfraSIG/concepts/WalOnMap"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7/attachments/wms_img.png"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>Accès libre et gratuit au service pour tout public</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7#OGC%3AWMS-Centres%20Publics%20d%E2%80%99Action%20Sociale%20%28CPAS%29%20de%20Wallonie%20Francophone%20-%20Service%20de%20visualisation%20WMS"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/d1a80c5c-419e-47fe-85e2-269792a6f9a2"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/6010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/Themes_geoportail_wallon_hierarchy"/>
+                <skos:prefLabel>Industrie et services</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/60">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/Themes_geoportail_wallon_hierarchy"/>
+                <skos:prefLabel>Société et activités</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes/concepts/administration">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes"/>
+                <skos:prefLabel>administration</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes/concepts/aspects%20sociaux%2C%20population">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET%20themes"/>
+                <skos:prefLabel>aspects sociaux, population</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/repr%C3%A9sentation%20sociale">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET"/>
+                <skos:prefLabel>représentation sociale</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/politique%20sociale">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET"/>
+                <skos:prefLabel>politique sociale</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET/concepts/aide%20sociale">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/GEMET"/>
+                <skos:prefLabel>aide sociale</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/Mots-cl%C3%A9s%20InfraSIG/concepts/WalOnMap">
+                <skos:inScheme rdf:resource="http://localhost:8080/geonetwork/srv/resources/registries/vocabularies/Mots-cl%C3%A9s%20InfraSIG"/>
+                <skos:prefLabel>WalOnMap</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a978cb02-e25a-4adb-b6bd-f0eec5c665e7#OGC%3AWMS-Centres%20Publics%20d%E2%80%99Action%20Sociale%20%28CPAS%29%20de%20Wallonie%20Francophone%20-%20Service%20de%20visualisation%20WMS">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/services/INDUSTRIES_SERVICES/CPAS/MapServer/WMSServer?request=GetCapabilities&service=WMS</dcat:accessURL>
+                <dct:title>Centres Publics d’Action Sociale (CPAS) de Wallonie Francophone - Service de visualisation WMS</dct:title>
+                <dct:format>OGC:WMS</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/918d6704-fcfc-45d8-afe5-3278150de0ff">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/918d6704-fcfc-45d8-afe5-3278150de0ff"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-16</dct:issued>
+                <dct:modified>2022-03-16</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/918d6704-fcfc-45d8-afe5-3278150de0ff/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/918d6704-fcfc-45d8-afe5-3278150de0ff">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/918d6704-fcfc-45d8-afe5-3278150de0ff">
+                <dct:identifier>918d6704-fcfc-45d8-afe5-3278150de0ff</dct:identifier>
+                <dct:title>Relief de la Wallonie - Modèle Numérique de Terrain (MNT) 2013-2014 - Sans interpolation - Service de visualisation WMS</dct:title>
+                <dct:abstract>Ce service permet de consulter la donnée "Relief de la Wallonie - Modèle Numérique de Terrain (MNT) 2013-2014 - Sans interpolation".</dct:abstract>
+                <dcat:keyword>MNT</dcat:keyword>
+                <dcat:keyword>terrain</dcat:keyword>
+                <dcat:keyword>DNG</dcat:keyword>
+                <dcat:keyword>Z</dcat:keyword>
+                <dcat:keyword>LiDAR</dcat:keyword>
+                <dcat:keyword>sol</dcat:keyword>
+                <dcat:keyword>modélisation</dcat:keyword>
+                <dcat:keyword>DTM</dcat:keyword>
+                <dcat:keyword>topographie</dcat:keyword>
+                <dcat:keyword>relief</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/50"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/5010"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/altitude"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/918d6704-fcfc-45d8-afe5-3278150de0ff/attachments/wms.png"/>
+                <dct:updated>2022-03-16</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/918d6704-fcfc-45d8-afe5-3278150de0ff#OGC%3AWMS-Service%20de%20visualisation%20WMS"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/0bc90b40-74f9-43d6-9a18-468a65e6f048"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/e8c2e398-a196-4886-bfe0-27424a3ae316"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/50">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Données de base</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/5010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Données topographiques</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/altitude">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>altitude</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/918d6704-fcfc-45d8-afe5-3278150de0ff#OGC%3AWMS-Service%20de%20visualisation%20WMS">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/services/RELIEF/WALLONIE_MNT_2013_2014_SANS_INTERPOLATION/MapServer/WMSServer</dcat:accessURL>
+                <dct:title>Service de visualisation WMS</dct:title>
+                <dct:format>OGC:WMS</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/98009697-4cb4-4443-ac30-1ecdb3a92088">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/76498b4d-df4c-4e91-8b05-dabf8a172344"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-10-19</dct:issued>
+                <dct:modified>2022-10-19</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/98009697-4cb4-4443-ac30-1ecdb3a92088/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/98009697-4cb4-4443-ac30-1ecdb3a92088">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/76498b4d-df4c-4e91-8b05-dabf8a172344">
+                <dct:identifier>76498b4d-df4c-4e91-8b05-dabf8a172344</dct:identifier>
+                <dct:title>Occupation du sol en Wallonie - WALOUS changement entre les années 2018 et 2020 - Service de visualisation REST</dct:title>
+                <dct:abstract>Ce service de visualisation REST permet de consulter les couches de données relatives au changement d'occupation du sol en Wallonie entre les années 2018 et 2020.</dct:abstract>
+                <dcat:keyword>Occupation du sol</dcat:keyword>
+                <dcat:keyword>WALOUS</dcat:keyword>
+                <dcat:keyword>Télédétection</dcat:keyword>
+                <dcat:keyword>COSW</dcat:keyword>
+                <dcat:keyword>apprentissage profond</dcat:keyword>
+                <dcat:keyword>intelligence artificielle</dcat:keyword>
+                <dcat:keyword>IA</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1030"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/50"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <dcat:theme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/concepts/R%C3%A9gional"/>
+                <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/lc"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/classification%20d%27image"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/traitement%20de%20l%27image"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/98009697-4cb4-4443-ac30-1ecdb3a92088/attachments/rest_img.png"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/98009697-4cb4-4443-ac30-1ecdb3a92088#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/98009697-4cb4-4443-ac30-1ecdb3a92088#WWW%3ALINK-Statistiques%20de%20disponibilit%C3%A9%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/5a5859ed-08f0-4bbb-8ed9-aa28494a8848"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1030">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Sol et sous-sol</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Nature et environnement</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Aménagement du territoire</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/50">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Données de base</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/concepts/R%C3%A9gional">
+                <skos:inScheme rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/SpatialScope"/>
+                <skos:prefLabel>Régional</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://inspire.ec.europa.eu/theme/lc">
+                <skos:inScheme rdf:resource="http://inspire.ec.europa.eu/theme"/>
+                <skos:prefLabel>Occupation des terres</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/classification%20d%27image">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>classification d'image</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/traitement%20de%20l%27image">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>traitement de l'image</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/98009697-4cb4-4443-ac30-1ecdb3a92088#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/SOL_SOUS_SOL/WAL_OCS_IA__CHA_18_20/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/98009697-4cb4-4443-ac30-1ecdb3a92088#WWW%3ALINK-Statistiques%20de%20disponibilit%C3%A9%20ESRI-REST">
+                <dcat:accessURL>https://directory.spatineo.com/service/164563</dcat:accessURL>
+                <dct:title>Statistiques de disponibilité ESRI-REST</dct:title>
+                <dct:format>WWW:LINK</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/72499232-965c-45f9-9fc0-e92879d70a2f">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/72499232-965c-45f9-9fc0-e92879d70a2f"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-28</dct:issued>
+                <dct:modified>2022-03-28</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/72499232-965c-45f9-9fc0-e92879d70a2f/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/72499232-965c-45f9-9fc0-e92879d70a2f">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/72499232-965c-45f9-9fc0-e92879d70a2f">
+                <dct:identifier>72499232-965c-45f9-9fc0-e92879d70a2f</dct:identifier>
+                <dct:title>Zones de distribution en eau (ZDE) - Service de visualisation REST</dct:title>
+                <dct:abstract>Ce service de visualisation REST permet de consulter la couche de données "Zones de distribution en eau".</dct:abstract>
+                <dcat:keyword>ZDE</dcat:keyword>
+                <dcat:keyword>Directive européenne 98/83/EC</dcat:keyword>
+                <dcat:keyword>consommation humaine</dcat:keyword>
+                <dcat:keyword>SWDE</dcat:keyword>
+                <dcat:keyword>eau du robinet</dcat:keyword>
+                <dcat:keyword>zone de distribution</dcat:keyword>
+                <dcat:keyword>Code de l'Eau</dcat:keyword>
+                <dcat:keyword>Drinking Water Directive</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3030"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1020"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet-theme/concepts/ressources"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet-theme/concepts/alimentation%2C%20eau%20potable"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet-theme/concepts/eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/r%C3%A9seau%20de%20distribution%20d%27eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/soci%C3%A9t%C3%A9%20de%20distribution%20d%27eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/eau%20courante"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/distribution"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/eau%20potable"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/traitement%20de%20l%27eau%20potable"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/approvisionnement%20en%20eau%20potable"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/l%C3%A9gislation%20en%20mati%C3%A8re%20de%20ressources%20en%20eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/gestion%20de%20la%20qualit%C3%A9%20de%20l%27eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/directive%20relative%20%C3%A0%20la%20qualit%C3%A9%20de%20l%27eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/eau%20propre%20%C3%A0%20la%20consommation"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/qualit%C3%A9%20de%20l%27eau"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/eau%20de%20surface"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/72499232-965c-45f9-9fc0-e92879d70a2f/attachments/rest_img.png"/>
+                <dct:issued>2018-04-01</dct:issued>
+                <dct:updated>2022-02-18</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/72499232-965c-45f9-9fc0-e92879d70a2f#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20ESRI-REST"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/72499232-965c-45f9-9fc0-e92879d70a2f#ESRI%3AREST-Service%20de%20visualisation%20REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/ee453149-a2d1-483c-814a-7ff73a7e4431"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3030">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Voies navigables</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1020">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet-theme/concepts/ressources">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet-theme"/>
+                <skos:prefLabel>ressources</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet-theme/concepts/alimentation%2C%20eau%20potable">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet-theme"/>
+                <skos:prefLabel>alimentation, eau potable</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet-theme/concepts/eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet-theme"/>
+                <skos:prefLabel>eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/r%C3%A9seau%20de%20distribution%20d%27eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>réseau de distribution d'eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/soci%C3%A9t%C3%A9%20de%20distribution%20d%27eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>société de distribution d'eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/eau%20courante">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>eau courante</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/distribution">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>distribution</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/eau%20potable">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>eau potable</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/traitement%20de%20l%27eau%20potable">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>traitement de l'eau potable</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/approvisionnement%20en%20eau%20potable">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>approvisionnement en eau potable</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/l%C3%A9gislation%20en%20mati%C3%A8re%20de%20ressources%20en%20eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>législation en matière de ressources en eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/gestion%20de%20la%20qualit%C3%A9%20de%20l%27eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>gestion de la qualité de l'eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/directive%20relative%20%C3%A0%20la%20qualit%C3%A9%20de%20l%27eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>directive relative à la qualité de l'eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/eau%20propre%20%C3%A0%20la%20consommation">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>eau propre à la consommation</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/qualit%C3%A9%20de%20l%27eau">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>qualité de l'eau</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/eau%20de%20surface">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>eau de surface</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/72499232-965c-45f9-9fc0-e92879d70a2f#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20ESRI-REST">
+                <dcat:accessURL>https://directory.spatineo.com/service/92795</dcat:accessURL>
+                <dct:title>Rapport de disponibilité du service ESRI-REST</dct:title>
+                <dct:format>WWW:LINK-1.0-http--link</dct:format>
+            </dcat:Distribution>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/72499232-965c-45f9-9fc0-e92879d70a2f#ESRI%3AREST-Service%20de%20visualisation%20REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/INDUSTRIES_SERVICES/ZDE/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a7c3d095-303c-486c-aa5c-7fef94c07db3">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/a7c3d095-303c-486c-aa5c-7fef94c07db3"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2021-10-15</dct:issued>
+                <dct:modified>2021-10-15</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a7c3d095-303c-486c-aa5c-7fef94c07db3/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a7c3d095-303c-486c-aa5c-7fef94c07db3">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/a7c3d095-303c-486c-aa5c-7fef94c07db3">
+                <dct:identifier>a7c3d095-303c-486c-aa5c-7fef94c07db3</dct:identifier>
+                <dct:title>Carte Archéologique de la Wallonie (CAW) - Service de visualisation REST</dct:title>
+                <dct:abstract>Ce service de visualisation REST permet la consultation de la donnée "CoPat – Carte archéologique".</dct:abstract>
+                <dcat:keyword>archéologie</dcat:keyword>
+                <dcat:keyword>patrimoine</dcat:keyword>
+                <dcat:keyword>archéologique</dcat:keyword>
+                <dcat:keyword>fouille</dcat:keyword>
+                <dcat:keyword>chantier</dcat:keyword>
+                <dcat:keyword>culture</dcat:keyword>
+                <dcat:keyword>histoire</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2010"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/a7c3d095-303c-486c-aa5c-7fef94c07db3/attachments/rest_img.png"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Agence%20wallonne%20du%20Patrimoine%20%28SPW%20-%20Territoire%2C%20Logement%2C%20Patrimoine%2C%20%C3%89nergie%20-%20Agence%20wallonne%20du%20Patrimoine%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Agence%20wallonne%20du%20Patrimoine%20%28SPW%20-%20Territoire%2C%20Logement%2C%20Patrimoine%2C%20%C3%89nergie%20-%20Agence%20wallonne%20du%20Patrimoine%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/a7c3d095-303c-486c-aa5c-7fef94c07db3#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/undefined"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/9e11aa59-e36e-4440-99e9-8da32abbee83"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Plans et règlements</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Aménagement du territoire</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a7c3d095-303c-486c-aa5c-7fef94c07db3#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/AMENAGEMENT_TERRITOIRE/CAW/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Agence%20wallonne%20du%20Patrimoine%20%28SPW%20-%20Territoire%2C%20Logement%2C%20Patrimoine%2C%20%C3%89nergie%20-%20Agence%20wallonne%20du%20Patrimoine%29">
+                <foaf:name>Agence wallonne du Patrimoine (SPW - Territoire, Logement, Patrimoine, Énergie - Agence wallonne du Patrimoine)</foaf:name>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/b6847322-0977-4c90-80d5-89a1124a9347">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/b6847322-0977-4c90-80d5-89a1124a9347"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-16</dct:issued>
+                <dct:modified>2022-03-16</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/b6847322-0977-4c90-80d5-89a1124a9347/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/b6847322-0977-4c90-80d5-89a1124a9347">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/b6847322-0977-4c90-80d5-89a1124a9347">
+                <dct:identifier>b6847322-0977-4c90-80d5-89a1124a9347</dct:identifier>
+                <dct:title>Plans de Mobilité - Service de visualisation REST</dct:title>
+                <dct:abstract>Ce service de visualisation permet la consultation des plans de mobilité en Wallonie. Les différentes couches de données relatives aux plans de Mobilité sont les suivantes : - Les plans (inter)Communaux de Mobilité (PCM/PICM); - Les plans supra-communaux de mobilité qui regroupent des plans de mobilité couvrant des zones plus étendues qu'un territoire communal (par exemple les Plans urbains de mobilité - PUM).</dct:abstract>
+                <dcat:keyword>PCM</dcat:keyword>
+                <dcat:keyword>Accessibilité</dcat:keyword>
+                <dcat:keyword>Plan</dcat:keyword>
+                <dcat:keyword>commune</dcat:keyword>
+                <dcat:keyword>PUM</dcat:keyword>
+                <dcat:keyword>PICM</dcat:keyword>
+                <dcat:keyword>plan de mobilité</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3010"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/60"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3020"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3040"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/30"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/6040"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2010"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/b6847322-0977-4c90-80d5-89a1124a9347/attachments/rest_img.png"/>
+                <dct:updated>2022-03-16</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/b6847322-0977-4c90-80d5-89a1124a9347#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/9cbae71b-bc51-4212-9ea9-679e7418e4c6"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Routes</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/60">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Société et activités</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3020">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>A pied et à vélo</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3040">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Transports en commun</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/30">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Mobilité</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/20">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Aménagement du territoire</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/6040">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Bruit</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Plans et règlements</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/b6847322-0977-4c90-80d5-89a1124a9347#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/MOBILITE/PLANS_MOBILITE/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/ac53306d-4b00-40db-9e45-f3b708799441">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/ac53306d-4b00-40db-9e45-f3b708799441"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-16</dct:issued>
+                <dct:modified>2022-03-16</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/ac53306d-4b00-40db-9e45-f3b708799441/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/ac53306d-4b00-40db-9e45-f3b708799441">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/ac53306d-4b00-40db-9e45-f3b708799441">
+                <dct:identifier>ac53306d-4b00-40db-9e45-f3b708799441</dct:identifier>
+                <dct:title>Bords de route en fauchage tardif - Service de visualisation REST</dct:title>
+                <dct:abstract>Ce service de visualisation permet de consulter la donnée Bords de route en fauchage tardif. La Wallonie présente un réseau routier très important qui indique combien les accotements, terre-pleins, talus et fossés, représentent d'importantes surfaces susceptibles d'accueillir une faune et une flore sauvages. Ce service est composé de quatre niveaux, correspondant aux classes d'objets géographiques numériques relatives aux bords de routes en fauchage tardif : - les zones de fauchage tardif (avec ou sans bande de sécurité), - les parcelles en fauchage tardif, - les emplacements des inventaires botaniques, - les emplacements des panneaux " fauchage tardif - zone refuge ".</dct:abstract>
+                <dcat:keyword>DGO3</dcat:keyword>
+                <dcat:keyword>DGARNE</dcat:keyword>
+                <dcat:keyword>Bord de route</dcat:keyword>
+                <dcat:keyword>Fauchage tardif</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1010"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/ac53306d-4b00-40db-9e45-f3b708799441/attachments/rest_img.png"/>
+                <dct:updated>2022-03-16</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/ac53306d-4b00-40db-9e45-f3b708799441#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/f641aff2-fc7b-49b1-99fb-9369b8f491a7"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Faune et flore</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Nature et environnement</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/ac53306d-4b00-40db-9e45-f3b708799441#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/FAUNE_FLORE/BDR/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/bc1e6d21-08c2-4e83-b822-0114f13b6831">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/76498b4d-df4c-4e91-8b05-dabf8a172344"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-11</dct:issued>
+                <dct:modified>2022-03-11</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/bc1e6d21-08c2-4e83-b822-0114f13b6831/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/bc1e6d21-08c2-4e83-b822-0114f13b6831">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/76498b4d-df4c-4e91-8b05-dabf8a172344">
+                <dct:identifier>76498b4d-df4c-4e91-8b05-dabf8a172344</dct:identifier>
+                <dct:title>Essais géotechniques - série - Service de visualisation REST</dct:title>
+                <dct:abstract>Ces services de visualisation permettent de consulter les couches de données relatives aux essais géotechniques.</dct:abstract>
+                <dcat:keyword>essais</dcat:keyword>
+                <dcat:keyword>terrain superficiel</dcat:keyword>
+                <dcat:keyword>essais de pénétration</dcat:keyword>
+                <dcat:keyword>cône</dcat:keyword>
+                <dcat:keyword>construction et ouvrage</dcat:keyword>
+                <dcat:keyword>sous-sol</dcat:keyword>
+                <dcat:keyword>CPT</dcat:keyword>
+                <dcat:keyword>borehole</dcat:keyword>
+                <dcat:keyword>roche</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2020"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1030"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet-theme/concepts/sol"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/sciences%20de%20la%20terre"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/sous-sol"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/g%C3%A9ophysique"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/sol"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/g%C3%A9otechnique"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/travaux%20de%20construction"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <dcat:theme rdf:resource="http://inspire.ec.europa.eu/theme/ge"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/bc1e6d21-08c2-4e83-b822-0114f13b6831/attachments/rest_img.png"/>
+                <dct:updated>2022-03-11</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les conditions d'utilisation du service sont régies par les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/bc1e6d21-08c2-4e83-b822-0114f13b6831#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20REST"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/bc1e6d21-08c2-4e83-b822-0114f13b6831#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/76ff89d9-fe15-4907-afd9-e9d7349f17bf"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/2020">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Risques et contraintes</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1030">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Sol et sous-sol</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet-theme/concepts/sol">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet-theme"/>
+                <skos:prefLabel>sol</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/sciences%20de%20la%20terre">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>sciences de la terre</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/sous-sol">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>sous-sol</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/g%C3%A9ophysique">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>géophysique</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/g%C3%A9otechnique">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>géotechnique</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/travaux%20de%20construction">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>travaux de construction</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://inspire.ec.europa.eu/theme/ge">
+                <skos:inScheme rdf:resource="http://inspire.ec.europa.eu/theme"/>
+                <skos:prefLabel>Géologie</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/bc1e6d21-08c2-4e83-b822-0114f13b6831#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20REST">
+                <dcat:accessURL>https://directory.spatineo.com/service/157141</dcat:accessURL>
+                <dct:title>Rapport de disponibilité du service REST</dct:title>
+                <dct:format>WWW:LINK-1.0-http--link</dct:format>
+            </dcat:Distribution>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/bc1e6d21-08c2-4e83-b822-0114f13b6831#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/SOL_SOUS_SOL/GEOTECH/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a4e0254f-ac41-4d70-911e-b961063450a9">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/a4e0254f-ac41-4d70-911e-b961063450a9"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-14</dct:issued>
+                <dct:modified>2022-03-14</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a4e0254f-ac41-4d70-911e-b961063450a9/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a4e0254f-ac41-4d70-911e-b961063450a9">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/a4e0254f-ac41-4d70-911e-b961063450a9">
+                <dct:identifier>a4e0254f-ac41-4d70-911e-b961063450a9</dct:identifier>
+                <dct:title>Plan hiver routes : Tronçons sensibles - Service de visualisation REST</dct:title>
+                <dct:abstract>Ces services de visualisation permettent de consulter la couche de données Plan hiver routes : Tronçons sensibles</dct:abstract>
+                <dcat:keyword>Plan hiver</dcat:keyword>
+                <dcat:keyword>Plan neige</dcat:keyword>
+                <dcat:keyword>Alerte routière</dcat:keyword>
+                <dcat:keyword>Poids lourds</dcat:keyword>
+                <dcat:keyword>Crise</dcat:keyword>
+                <dcat:keyword>Hiver</dcat:keyword>
+                <dcat:keyword>Camion</dcat:keyword>
+                <dcat:keyword>Déviation</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3010"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet-theme/concepts/catastrophes%2C%20accidents%2C%20risques"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/neige"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/pr%C3%A9vention%20des%20catastrophes"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/froid"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/verglas"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/route%20%C3%A0%20grande%20circulation"/>
+                <dcat:theme rdf:resource="http://geonetwork-opensource.org/gemet/concepts/contr%C3%B4le%20de%20la%20circulation"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/a4e0254f-ac41-4d70-911e-b961063450a9/attachments/rest_img.png"/>
+                <dct:updated>2022-03-14</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dct:license>license</dct:license>
+                <dct:license>license</dct:license>
+                <dct:license>Les Conditions d’accès et d’utilisation des services web géographiques de visualisation du Service public de Wallonie sont d'applications. Elles sont consultables à l'adresse https://geoportail.wallonie.be/files/documents/ConditionsSPW/LicServicesSPW.pdf</dct:license>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/a4e0254f-ac41-4d70-911e-b961063450a9#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20ESRI-REST"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/a4e0254f-ac41-4d70-911e-b961063450a9#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/47e1147e-1ce6-4c53-97a4-42cdf03691ab"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/3010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Routes</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet-theme/concepts/catastrophes%2C%20accidents%2C%20risques">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet-theme"/>
+                <skos:prefLabel>catastrophes, accidents, risques</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/neige">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>neige</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/pr%C3%A9vention%20des%20catastrophes">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>prévention des catastrophes</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/froid">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>froid</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/verglas">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>verglas</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/route%20%C3%A0%20grande%20circulation">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>route à grande circulation</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="http://geonetwork-opensource.org/gemet/concepts/contr%C3%B4le%20de%20la%20circulation">
+                <skos:inScheme rdf:resource="http://geonetwork-opensource.org/gemet"/>
+                <skos:prefLabel>contrôle de la circulation</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a4e0254f-ac41-4d70-911e-b961063450a9#WWW%3ALINK-1.0-http--link-Rapport%20de%20disponibilit%C3%A9%20du%20service%20ESRI-REST">
+                <dcat:accessURL>https://directory.spatineo.com/service/158178</dcat:accessURL>
+                <dct:title>Rapport de disponibilité du service ESRI-REST</dct:title>
+                <dct:format>WWW:LINK-1.0-http--link</dct:format>
+            </dcat:Distribution>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a4e0254f-ac41-4d70-911e-b961063450a9#ESRI%3AREST-Service%20de%20visualisation%20ESRI-REST">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/rest/services/MOBILITE/PLANHIVER_TRONCONS/MapServer</dcat:accessURL>
+                <dct:title>Service de visualisation ESRI-REST</dct:title>
+                <dct:format>ESRI:REST</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:dct="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://www.w3.org/TR/void/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:skos="http://www.w3.org/2004/02/kos/core#">
+            <dcat:CatalogRecord rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a4347f26-bd68-4f99-a047-d6decf519731">
+                <foaf:primaryTopic rdf:resource="http://localhost:8080/geonetwork/srv/resources/a4347f26-bd68-4f99-a047-d6decf519731"/>
+                <dct:conformsTo rdf:resource="https://www.iso.org/standard/32557.html"/>
+                <dct:issued>2022-03-16</dct:issued>
+                <dct:modified>2022-03-16</dct:modified>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a4347f26-bd68-4f99-a047-d6decf519731/formatters/xml">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>application/xml</rdf:value>
+                                <rdfs:label>XML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+                <dct:references>
+                    <rdf:Description rdf:about="https://metawal4.test.wallonie.be/geonetwork/srv/api/records/a4347f26-bd68-4f99-a047-d6decf519731">
+                        <dct:format>
+                            <dct:IMT>
+                                <rdf:value>text/html</rdf:value>
+                                <rdfs:label>HTML</rdfs:label>
+                            </dct:IMT>
+                        </dct:format>
+                    </rdf:Description>
+                </dct:references>
+            </dcat:CatalogRecord>
+            <dcat:Dataset rdf:about="http://localhost:8080/geonetwork/srv/resources/a4347f26-bd68-4f99-a047-d6decf519731">
+                <dct:identifier>a4347f26-bd68-4f99-a047-d6decf519731</dct:identifier>
+                <dct:title>Bords de route en fauchage tardif - Service de visualisation WMS</dct:title>
+                <dct:abstract>Ce service de visualisation permet de consulter la donnée Bords de route en fauchage tardif. La Wallonie présente un réseau routier très important qui indique combien les accotements, terre-pleins, talus et fossés, représentent d'importantes surfaces susceptibles d'accueillir une faune et une flore sauvages. Ce service est composé de quatre niveaux, correspondant aux classes d'objets géographiques numériques relatives aux bords de routes en fauchage tardif : - les zones de fauchage tardif (avec ou sans bande de sécurité), - les parcelles en fauchage tardif, - les emplacements des inventaires botaniques, - les emplacements des panneaux " fauchage tardif - zone refuge ".</dct:abstract>
+                <dcat:keyword>DGO3</dcat:keyword>
+                <dcat:keyword>DGARNE</dcat:keyword>
+                <dcat:keyword>Bord de route</dcat:keyword>
+                <dcat:keyword>Fauchage tardif</dcat:keyword>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1010"/>
+                <dcat:theme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO"/>
+                <foaf:thumbnail rdf:resource="https://metawal.wallonie.be/geonetwork/srv/api/records/a4347f26-bd68-4f99-a047-d6decf519731/attachments/wms.png"/>
+                <dct:updated>2022-03-16</dct:updated>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29"/>
+                <dct:publisher rdf:resource="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29"/>
+                <dcat:distribution rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/a4347f26-bd68-4f99-a047-d6decf519731#OGC%3AWMS-Service%20de%20visualisation%20WMS"/>
+                <dct:relation rdf:resource="https://metawal4.test.wallonie.be/geonetwork/records/f641aff2-fc7b-49b1-99fb-9369b8f491a7"/>
+            </dcat:Dataset>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#ThemesGeoportailWallon/10">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Nature et environnement</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon#SubThemesGeoportailWallon/1010">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/theme-geoportail-wallon"/>
+                <skos:prefLabel>Faune et flore</skos:prefLabel>
+            </skos:Concept>
+            <skos:Concept xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:about="https://metawal.wallonie.be/thesaurus/infrasig/concepts/Reporting%20INSPIRENO">
+                <skos:inScheme rdf:resource="https://metawal.wallonie.be/thesaurus/infrasig"/>
+                <skos:prefLabel>Reporting INSPIRENO</skos:prefLabel>
+            </skos:Concept>
+            <dcat:Distribution rdf:about="https://metawal4.test.wallonie.be/geonetwork/records/a4347f26-bd68-4f99-a047-d6decf519731#OGC%3AWMS-Service%20de%20visualisation%20WMS">
+                <dcat:accessURL>https://geoservices.wallonie.be/arcgis/services/FAUNE_FLORE/BDR/MapServer/WMSServer</dcat:accessURL>
+                <dct:title>Service de visualisation WMS</dct:title>
+                <dct:format>OGC:WMS</dct:format>
+            </dcat:Distribution>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Direction de l'Intégration des géodonnées (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Helpdesk%20carto%20du%20SPW%20%28SPW%20-%20Secr%C3%A9tariat%20g%C3%A9n%C3%A9ral%20-%20SPW%20Digital%20-%20D%C3%A9partement%20de%20la%20G%C3%A9omatique%20-%20Direction%20de%20l%27Int%C3%A9gration%20des%20g%C3%A9odonn%C3%A9es%29">
+                <foaf:name>Helpdesk carto du SPW (SPW - Secrétariat général - SPW Digital - Département de la Géomatique - Direction de l'Intégration des géodonnées)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Organization rdf:about="http://localhost:8080/geonetwork/srv/resources/organizations/Service%20public%20de%20Wallonie%20%28SPW%29">
+                <foaf:name>Service public de Wallonie (SPW)</foaf:name>
+                <foaf:member rdf:resource="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be"/>
+            </foaf:Organization>
+            <foaf:Agent rdf:about="http://localhost:8080/geonetwork/srv/resources/persons/helpdesk.carto%40spw.wallonie.be">
+                <foaf:mbox rdf:resource="mailto:helpdesk.carto@spw.wallonie.be"/>
+            </foaf:Agent>
+        </rdf:RDF>
+</csw:GetRecordsResponse>
