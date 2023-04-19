@@ -10,5 +10,8 @@
     "devDependencies": {
         "typescript": "^4.6.3"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "engines": {
+        "node": "^16.0"
+    }
 }

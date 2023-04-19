@@ -62,6 +62,11 @@ export class KnowledgeGraph {
         this.graphName = graphName;
         this.redisGraph = new Graph(client, this.graphName);
         this.namespacePrefixes = namespacePrefixes;
+
+        // init full text index
+        // WARN this call is async - it can't be waited on as part of a constructor
+        this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('dcat:Dataset', 'FTkeywords')");
+        this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('skos:Concept', 'FTlabel')");
     }
 
     async loadGraph(store: Store) {
@@ -84,20 +89,22 @@ export class KnowledgeGraph {
         const typeLabel = type && reduceWithWellKnownPrefix(type, {...this.namespacePrefixes, ...namespacePrefixes});
         // TODO use FOREACH : MATCH (subj) FOREACH(st in [{pred: pred1, obj: obj1}, {pred: pred2, obj: obj2}] | MERGE (subj)-[:REL { uri: st.pred }]->({ uri: st.obj }) )
 
-        let query = `MERGE (subj { uri: $subjectUri })
-    SET subj:\`${typeLabel || ''}\``;
+        let matches: string[] = [];
+        let merges: string[] = [`MERGE (subj { uri: $subjectUri })`];
+        let sets = [`SET subj:\`${typeLabel || ''}\``];
+
         const params: Record<string, any> = {
             subjectUri
         };
 
-        statements.forEach(s => {
+        statements.forEach((s,index) => {
             if (
                 (s.object.classOrder == ClassOrder.NamedNode || s.object.classOrder == ClassOrder.BlankNode) &&
                 INLINE_OBJ_PROPS.indexOf(s.predicate.value) < 0
             ) {
                 const predicateLabel = reduceWithWellKnownPrefix(s.predicate.value, {...this.namespacePrefixes, ...namespacePrefixes})
-                query += `
-      MERGE (subj)-[:\`${predicateLabel || ''}\` {uri: '${s.predicate.value}'}]->({ uri: '${s.object.value}' })`;
+                merges.push(`MERGE (obj_${index} { uri: '${s.object.value}' })`);
+                merges.push(`MERGE (subj)-[:\`${predicateLabel || ''}\` {uri: '${s.predicate.value}'}]->(obj_${index})`)
             } else {
                 let value = getNodeValue(s.object);
                 const prop = `\`${s.predicate.value}\``;
@@ -106,7 +113,15 @@ export class KnowledgeGraph {
                     // this predicate can be an array of values
                     if (typeof value == 'string') value = `'${value.replaceAll("'", "\\'")}'`;
                     if (value != undefined) {
-                        query += `\nSET subj.${prop} = coalesce(subj.${prop}, []) + ${value} `;
+                        sets.push(`\nSET subj.${prop} = coalesce(subj.${prop}, []) + ${value} `);
+                        if (s.predicate.value == 'http://www.w3.org/ns/dcat#keyword') {
+                            // Create an aggregated text field for fulltext indexing purposes
+                            sets.push(`\nSET subj.FTkeywords = coalesce(subj.FTkeywords, '') + ' ' + ${value} `);
+                        }
+                        if (s.predicate.value == 'http://www.w3.org/2004/02/skos/core#prefLabel') {
+                            // Create an aggregated text field for fulltext indexing purposes
+                            sets.push(`\nSET subj.FTlabel = coalesce(subj.FTlabel, '') + ' ' + ${value} `);
+                        }
                     }
                 } else {
                     if (literals[prop]) {
@@ -119,8 +134,10 @@ export class KnowledgeGraph {
 
         if (Object.keys(literals).length > 0) {
             params.literals = literals;
-            query += `\nSET subj += $literals`
+            sets.push(`\nSET subj += $literals`);
         }
+
+        const query = matches.join('\n') + '\n' + merges.join('\n') + '\n' + sets.join('\n');
 
         return this.redisGraph.query(query, {params});
     }
