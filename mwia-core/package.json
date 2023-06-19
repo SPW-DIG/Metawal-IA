@@ -1,0 +1,26 @@
+{
+  "name": "@spw-dig/mwia-core",
+  "version": "0.0.1",
+  "description": "Core Model for the Metawal-IA recommandation engine",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs",
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "build": "yarn build-cjs && yarn build-esm",
+    "build-cjs": "tsc -b . tsconfig.cjs.json",
+    "build-esm": "tsc -b .",
+    "uml": "npx tsuml2 -m --glob \"./models/*.ts\" -o ./models/uml_diagram.svg"
+  },
+  "keywords": [],
+  "author": "philippe@datavillage.me",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "4.6.2"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "^16.0"
+  }
+}

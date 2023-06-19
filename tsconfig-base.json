@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "ES2019",
+        "module": "esnext",
+        "target": "ES2021",
         "esModuleInterop": true,
-        "lib": ["ES2019", "dom", "dom.iterable"],
+        //"lib": ["ES2019", "dom", "dom.iterable"],
         //"rootDir": "src",
 
         //"outDir": "dist/lib", // path to compiled TS and definition files
@@ -14,7 +14,7 @@
         "sourceMap": true,
 
         "jsx": "react",
-        //"moduleResolution": "node",
+        "moduleResolution": "Node",
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
@@ -30,5 +30,8 @@
 
         "skipLibCheck": true,
         //"typeRoots": [ "./types", "./node_modules/@types"]
+
+        "composite": true,
+        "incremental": true
     }
 }

@@ -55,30 +55,43 @@ export function getNodeValue(obj: Statement['object']) {
 
 export class KnowledgeGraph {
     private graphName;
-    private redisGraph;
+    private redisClient: RedisClientType;
+    private redisGraph: Graph;
     private namespacePrefixes;
 
     constructor(client: RedisClientType, graphName: string, namespacePrefixes: Record<string, string> = {}) {
         this.graphName = graphName;
-        this.redisGraph = new Graph(client, this.graphName);
+        this.redisClient = client;
+        this.redisGraph = new Graph(this.redisClient, this.graphName);
         this.namespacePrefixes = namespacePrefixes;
+    }
 
+    async init() {
         // init full text index
         // WARN this call is async - it can't be waited on as part of a constructor
-        this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('dcat:Dataset', 'FTkeywords')");
-        this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('skos:Concept', 'FTlabel')");
+        await this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('dcat:Dataset', 'FTkeywords')");
+        await this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('skos:Concept', 'FTlabel')");
+    }
+
+    async reset() {
+        return this.redisClient.graph.delete(this.graphName);
     }
 
     async loadGraph(store: Store) {
+        let count = 0;
+
         const statementsBySubject = store.subjectIndex
         for (const subject in statementsBySubject) {
             const statements = statementsBySubject[subject] as unknown as rdflib.Statement[];
 
             if (statements.length) {
                 const res = await this.addSubjectStatements(statements[0].subject.value, statements, store.namespaces);
+                count++;
                 res;
             }
         }
+
+        return count;
     }
 
     async addSubjectStatements(subjectUri: string, statements: Statement[], namespacePrefixes: Record<string, string> = {}) {

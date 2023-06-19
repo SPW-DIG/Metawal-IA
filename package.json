@@ -4,10 +4,19 @@
     "description": "Metawal IA Project",
     "private": true,
     "scripts": {
-        "format": "prettier --write --ignore-unknown \"{config,public,src}/**/*.{html,css,js,ts,json}\"",
-        "uml": "npx tsuml2 -m --glob \"./models/*.ts\" -o ./models/uml_diagram.svg"
+        "clean": "yarn workspaces run clean",
+        "build": "yarn workspaces run build",
+        "start": "yarn workspace mwia-engine run start"
     },
+    "keywords": [],
+    "author": "philippe@datavillage.me",
+    "license": "MIT",
+    "workspaces": [
+        "mwia-core",
+        "mwia-engine"
+    ],
     "devDependencies": {
+        "shx": "^0.3.4",
         "typescript": "^4.6.3"
     },
     "dependencies": {},
