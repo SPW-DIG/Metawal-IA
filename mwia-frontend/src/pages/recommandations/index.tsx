@@ -5,6 +5,7 @@ import {TextField} from "@material-ui/core";
 import {useCallback, useState} from "react";
 import {DatasetRecommendation} from "@spw-dig/mwia-core";
 import {getBackendUrl} from "../../config";
+import {Switch as MuiSwitch} from '@material-ui/core';
 
 export const SearchAndRec = () => {
     const {session} = useSession();
@@ -27,18 +28,20 @@ export const SearchAndRec = () => {
 
 export const SearchDatasets = () => {
 
+    const [useProfile, setUseProfile] = useState(false);
+
     const [recos, setRecos] = useState<DatasetRecommendation[]>([]);
 
     const search = useCallback(async (searchText: string | undefined | null) => {
         let recos: DatasetRecommendation[] = [];
 
         if (searchText) {
-            const resp = await fetch(getBackendUrl("/recommandations", {search: searchText}));
+            const resp = await fetch(getBackendUrl("/recommandations", {search: searchText, userId: useProfile ? 'https://geoportail.wallonie.be/users/user002' : undefined}));
             recos = (await resp.json()) as DatasetRecommendation[];
         }
 
         setRecos(recos);
-    }, []);
+    }, [useProfile]);
 
     return (
         <div>
@@ -48,6 +51,7 @@ export const SearchDatasets = () => {
                         search((e.target as HTMLInputElement).value)
                     }
                 }}/>
+                <MuiSwitch checked={useProfile} onChange={(event, checked) => setUseProfile(checked)}/> Use Profile
             </div>
             <div>
                 {recos.map(reco =>

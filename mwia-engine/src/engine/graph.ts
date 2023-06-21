@@ -3,7 +3,7 @@ import {Literal, Namespace, Statement, Store} from 'rdflib';
 import ClassOrder from 'rdflib/lib/class-order';
 import * as rdflib from "rdflib";
 import {DatasetRecommendation, PersonalProfile} from "@spw-dig/mwia-core";
-import {fulltextSearch} from "./cypherQueries";
+import {fulltextSearch, fulltextSearchAndUser} from "./cypherQueries";
 
 var FOAF = Namespace("http://xmlns.com/foaf/0.1/");
 
@@ -66,8 +66,9 @@ export function deaccent(str: string) {
 }
 
 export type SearchQuery = {
-    userProfile?: PersonalProfile;
+    userId?: string;
     terms?: string[];
+    limit?: number;
     // TODO temporal
 }
 
@@ -200,26 +201,59 @@ export class KnowledgeGraph {
     CALL db.idx.fulltext.queryNodes('skos:Concept', 'eau') YIELD node as tag MATCH (node)-[p]->(tag) RETURN node,p,tag LIMIT 50"
     */
 
+    async loadUserProfile(profile: PersonalProfile) {
+        let mergeQuery = `
+        MERGE (user:User {uri:'${profile.uri}'})
+        WITH user 
+        `;
+
+        profile.browseHistory.forEach(item => {
+            mergeQuery += `
+        MATCH (res:\`dcat:Resource\` {uri:'${item.datasetUri}'})
+        MERGE (user)-[:hasBrowsed]->(res)
+        `
+        })
+
+        return this.redisGraph.query(mergeQuery).catch(err => {
+            console.warn(`Cypher query failed : ${err} \n>>> ${mergeQuery}`);
+            throw err;
+        });
+    }
+
+    async deleteUserProfile(userUri: string) {
+        let deleteQuery = `
+        MATCH (user:User {uri:'${userUri}'})
+        DELETE user
+        `;
+
+        return this.redisGraph.query(deleteQuery);
+    }
+
     async searchDatasets(query: SearchQuery): Promise<DatasetRecommendation[]> {
-        if (query.terms) {
-
-            const cypher_query = fulltextSearch(deaccent(query.terms.join(' ')));
-            console.log(`CYPHER QUERY: ${cypher_query}`);
-
-            const reply = await this.redisGraph.query<SearchResultNode>(cypher_query);
-
-            return reply.data ? reply.data.map((node) => ({
-                datasetUri: node.uri,
-                id: node.id,
-                score: node.score,
-                timestamp: new Date().getTime(),
-                title: node.title,
-                //id: node.properties['http://purl.org/dc/terms/identifier'][0],
-            })) : []
+        let cypher_query;
+        if (query.terms && query.userId) {
+            cypher_query = fulltextSearchAndUser(deaccent(query.terms.join(' ')), query.userId, undefined, query.limit);
+        } else if (query.terms) {
+            cypher_query = fulltextSearch(deaccent(query.terms.join(' ')), undefined, query.limit);
+        } else if (query.userId) {
+            return [];
         } else {
-            // TODO user based search
-            return []
+            // spontaneous suggestions
+            return [];
         }
+
+        console.log(`CYPHER QUERY: ${cypher_query}`);
+
+        const reply = await this.redisGraph.query<SearchResultNode>(cypher_query);
+
+        return reply.data ? reply.data.map((node) => ({
+            datasetUri: node.uri,
+            id: node.id,
+            score: node.score,
+            timestamp: new Date().getTime(),
+            title: node.title,
+            //id: node.properties['http://purl.org/dc/terms/identifier'][0],
+        })) : []
 
     }
 
@@ -230,6 +264,23 @@ export class KnowledgeGraph {
             datasets: reply.data ? reply.data[0].count : 0,
             lastSync: 0
         }
+    }
+
+    async cleanUp() {
+
+        // remove all erroneous relations to 'https://metawal.wallonie.be/geonetwork/records/'
+        return this.redisGraph.query(`
+        MATCH (o {uri:'https://metawal.wallonie.be/geonetwork/records/'})
+        DELETE o
+        `);
+
+        // replace 'dct:relation' that transit via dcat:CatalogRecord with direct 'dct:dsrelation'
+        return this.redisGraph.query(`
+        MATCH (res1:\`dcat:Resource\`)-[:\`dct:relation\`]-(rec:\`dcat:CatalogRecord\`)-[:\`dct:relation\`]-(res2:\`dcat:Resource\`)
+        WHERE res1 <> res2
+        MERGE (res1)-[:\`dct:dsrelation\`]-(res2)
+        `);
+
     }
 
     /*

@@ -38,7 +38,7 @@ export const LambdaUser2: PersonalProfile = {
 
   userCategories: [],
 
-  tagsOfInterest: [],
+  tagsOfInterest: ["http://geonetwork-opensource.org/gemet/concepts/risque%20naturel"],
 
   lastVisit: "2023-03-21T10:00:00Z",
 
@@ -47,6 +47,10 @@ export const LambdaUser2: PersonalProfile = {
   ],
 
   browseHistory: [
+    {
+      timestamp: "2023-04-20T10:15:00Z",
+      datasetUri: "http://localhost:8080/geonetwork/srv/resources/e8463e37-da70-41f0-8157-fcb7d186e394"
+    }
   ],
 
   downloadHistory: [],

@@ -55,10 +55,13 @@ export class RecommandationEngine {
             } else {
                 throw new Error("User does not exist");
             }
+
             // TODO load profile into graph
-            return [];
+
+
+            return this.graph.searchDatasets({terms: searchTerms, userId})
         } else {
-            return this.graph.searchDatasets({terms: searchTerms, userProfile: undefined})
+            return this.graph.searchDatasets({terms: searchTerms})
         }
     }
 

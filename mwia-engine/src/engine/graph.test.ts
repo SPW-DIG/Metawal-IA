@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import { KnowledgeGraph } from "./graph";
 import { createClient, Graph, RedisClientType } from "redis";
 import {XMLBuilder, XMLParser} from "fast-xml-parser";
+import {DummyUsersRegistry} from "../users/pds";
+import {assert} from "@spw-dig/mwia-core";
 
 // example ttl from https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples
 
@@ -185,3 +187,26 @@ test('Query nodes by full text index on theme keywords', async () => {
 
   nodes;
 });
+
+
+
+test('Insert and delete user profile', async () => {
+
+  const userReg = new DummyUsersRegistry();
+
+  // create Redis graph client
+  const redis: RedisClientType = createClient();
+  await redis.connect();
+
+  const kg = new KnowledgeGraph(redis, 'metawal');
+
+  const profile = userReg.getUserProfile("https://geoportail.wallonie.be/users/user002");
+
+  assert(profile);
+
+  await kg.loadUserProfile(profile);
+
+  await kg.deleteUserProfile(profile.uri);
+
+});
+

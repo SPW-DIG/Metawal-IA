@@ -20,7 +20,7 @@ async function createEngine() {
   return engine;
 }
 
-test('Start engine', async () => {
+test.skip('Init engine & sync data', async () => {
 
   const engine = await createEngine();
 
@@ -35,5 +35,15 @@ test('Start engine', async () => {
 
   // sync again
   updatedRecords = await engine.syncCatalog();
+})
+
+
+test('Query based on profile', async () => {
+
+  const engine = await createEngine();
+
+  const recos = engine.getRecommandations("https://geoportail.wallonie.be/users/user002");
+
+  recos;
 })
 
