@@ -117,6 +117,8 @@ export class RedisQueue {
         this.consumerName = consumerName;
 
         this._redis = createClient();
+
+        this._redis.on('error', err => console.log('Redis Client Error', err));
     }
 
     async createConsumerGroup() {

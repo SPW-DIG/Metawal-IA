@@ -13,7 +13,8 @@
     "license": "MIT",
     "workspaces": [
         "mwia-core",
-        "mwia-engine"
+        "mwia-engine",
+        "mwia-frontend"
     ],
     "devDependencies": {
         "shx": "^0.3.4",
@@ -22,5 +23,9 @@
     "dependencies": {},
     "engines": {
         "node": "^16.0"
+    },
+    "resolutions": {
+        "@types/react": "^17",
+        "react": "^17"
     }
 }

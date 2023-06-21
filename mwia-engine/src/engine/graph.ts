@@ -1,7 +1,11 @@
 import {Graph, RedisClientType} from "redis";
-import {Literal, Statement, Store} from 'rdflib';
+import {Literal, Namespace, Statement, Store} from 'rdflib';
 import ClassOrder from 'rdflib/lib/class-order';
 import * as rdflib from "rdflib";
+import {DatasetRecommendation, PersonalProfile} from "@spw-dig/mwia-core";
+import {fulltextSearch} from "./cypherQueries";
+
+var FOAF = Namespace("http://xmlns.com/foaf/0.1/");
 
 export enum WELLKNOWN_TYPES {
     Dataset = 'http://www.w3.org/ns/dcat#Dataset'
@@ -28,6 +32,10 @@ export const INLINE_OBJ_PROPS = [
     'http://www.w3.org/2006/vcard/ns#hasURL'
 ];
 
+export type DatasetGraphNode = { id: number, labels: string[], properties: {uri: string /* , ... */} & any};
+
+export type SearchResultNode = { id: string, uri: string, title: string, score: number};
+
 export const DATE_TYPES = ['http://www.w3.org/2001/XMLSchema#date'];
 
 export function reduceWithWellKnownPrefix(uri: string, namespaces: Record<string, string>) {
@@ -53,6 +61,16 @@ export function getNodeValue(obj: Statement['object']) {
     }
 }
 
+export function deaccent(str: string) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+export type SearchQuery = {
+    userProfile?: PersonalProfile;
+    terms?: string[];
+    // TODO temporal
+}
+
 export class KnowledgeGraph {
     private graphName;
     private redisClient: RedisClientType;
@@ -69,23 +87,32 @@ export class KnowledgeGraph {
     async init() {
         // init full text index
         // WARN this call is async - it can't be waited on as part of a constructor
-        await this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('dcat:Dataset', 'FTkeywords')");
+        await this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('dcat:Resource', 'FTkeywords')");
         await this.redisGraph.query("CALL db.idx.fulltext.createNodeIndex('skos:Concept', 'FTlabel')");
     }
 
     async reset() {
-        return this.redisClient.graph.delete(this.graphName);
+        return this.redisClient.graph.delete(this.graphName).catch(err => {
+            if (err.toString().indexOf('Invalid graph operation on empty key') >= 0) {
+                // ignore
+            } else {
+                throw err;
+            }
+        });
     }
 
     async loadGraph(store: Store) {
         let count = 0;
+
+        // the map of CatalogObjects (Dataset, Service, ...) to their CatalogRecords
+        const object2recordMap = store.statementsMatching(undefined, FOAF('primaryTopic'), undefined).reduce<Record<string, string>>((prev, current) => { prev[current.object.value] = current.subject.value; return prev }, {});
 
         const statementsBySubject = store.subjectIndex
         for (const subject in statementsBySubject) {
             const statements = statementsBySubject[subject] as unknown as rdflib.Statement[];
 
             if (statements.length) {
-                const res = await this.addSubjectStatements(statements[0].subject.value, statements, store.namespaces);
+                const res = await this.addSubjectStatements(statements[0].subject.value, statements, store.namespaces, object2recordMap);
                 count++;
                 res;
             }
@@ -94,17 +121,27 @@ export class KnowledgeGraph {
         return count;
     }
 
-    async addSubjectStatements(subjectUri: string, statements: Statement[], namespacePrefixes: Record<string, string> = {}) {
+    async addSubjectStatements(subjectUri: string, statements: Statement[], namespacePrefixes: Record<string, string> = {}, object2recordMap: Record<string, string>) {
         const literals = {};
 
         const typeSt = statements.find(s => s.predicate.value == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type');
         const type = typeSt?.object.value;
-        const typeLabel = type && reduceWithWellKnownPrefix(type, {...this.namespacePrefixes, ...namespacePrefixes});
+
+        let typeLabels = type ? [reduceWithWellKnownPrefix(type, {...this.namespacePrefixes, ...namespacePrefixes})] : [];
+
+        // If this is a first-order catalog object, add the generic dcat:Resource type
+        if (object2recordMap[subjectUri]) {
+            typeLabels.push(reduceWithWellKnownPrefix('http://www.w3.org/ns/dcat#Resource', {...this.namespacePrefixes, ...namespacePrefixes}));
+        } else if (!typeLabels.length) {
+            // default label
+            typeLabels.push('Prop');
+        }
+
         // TODO use FOREACH : MATCH (subj) FOREACH(st in [{pred: pred1, obj: obj1}, {pred: pred2, obj: obj2}] | MERGE (subj)-[:REL { uri: st.pred }]->({ uri: st.obj }) )
 
         let matches: string[] = [];
         let merges: string[] = [`MERGE (subj { uri: $subjectUri })`];
-        let sets = [`SET subj:\`${typeLabel || ''}\``];
+        let sets = [`SET subj${typeLabels.map(l => `:\`${l}\``).join('')}`];
 
         const params: Record<string, any> = {
             subjectUri
@@ -129,11 +166,11 @@ export class KnowledgeGraph {
                         sets.push(`\nSET subj.${prop} = coalesce(subj.${prop}, []) + ${value} `);
                         if (s.predicate.value == 'http://www.w3.org/ns/dcat#keyword') {
                             // Create an aggregated text field for fulltext indexing purposes
-                            sets.push(`\nSET subj.FTkeywords = coalesce(subj.FTkeywords, '') + ' ' + ${value} `);
+                            sets.push(`\nSET subj.FTkeywords = coalesce(subj.FTkeywords, '') + ' ' + ${deaccent(value+'')} `);
                         }
                         if (s.predicate.value == 'http://www.w3.org/2004/02/skos/core#prefLabel') {
                             // Create an aggregated text field for fulltext indexing purposes
-                            sets.push(`\nSET subj.FTlabel = coalesce(subj.FTlabel, '') + ' ' + ${value} `);
+                            sets.push(`\nSET subj.FTlabel = coalesce(subj.FTlabel, '') + ' ' + ${deaccent(value+'')} `);
                         }
                     }
                 } else {
@@ -155,6 +192,45 @@ export class KnowledgeGraph {
         return this.redisGraph.query(query, {params});
     }
 
+
+    /* Cypher queries :
+
+    CALL db.idx.fulltext.queryNodes('Movie', 'Book') YIELD node RETURN node.title
+
+    CALL db.idx.fulltext.queryNodes('skos:Concept', 'eau') YIELD node as tag MATCH (node)-[p]->(tag) RETURN node,p,tag LIMIT 50"
+    */
+
+    async searchDatasets(query: SearchQuery): Promise<DatasetRecommendation[]> {
+        if (query.terms) {
+
+            const cypher_query = fulltextSearch(deaccent(query.terms.join(' ')));
+            console.log(`CYPHER QUERY: ${cypher_query}`);
+
+            const reply = await this.redisGraph.query<SearchResultNode>(cypher_query);
+
+            return reply.data ? reply.data.map((node) => ({
+                datasetUri: node.uri,
+                id: node.id,
+                score: node.score,
+                timestamp: new Date().getTime(),
+                title: node.title,
+                //id: node.properties['http://purl.org/dc/terms/identifier'][0],
+            })) : []
+        } else {
+            // TODO user based search
+            return []
+        }
+
+    }
+
+    async stats() {
+        const reply = await this.redisGraph.query<{count: number}>("MATCH (o:`dcat:Dataset`) RETURN count(o) as count");
+
+        return {
+            datasets: reply.data ? reply.data[0].count : 0,
+            lastSync: 0
+        }
+    }
 
     /*
     async findShortestPaths(startUri: string) {

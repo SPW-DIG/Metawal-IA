@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig-base.json",
+    "compilerOptions": {
+        "outDir": "dist/lib",
+        // path to compiled TS and definition files
+        "declarationDir": "dist/types",
+        "rootDir": "src",
+        //"lib": ["dom", "dom.iterable"],
+    },
+
+    "references": [{ "path": "../mwia-core" }],
+}

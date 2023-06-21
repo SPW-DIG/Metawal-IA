@@ -2,6 +2,7 @@ import {UsersRegistry} from "../users/pds";
 import {KnowledgeGraph} from "./graph";
 import {CatalogClient} from "../catalog/catalog";
 import * as rdflib from "rdflib";
+import {DatasetRecommendation} from "@spw-dig/mwia-core";
 
 
 export class RecommandationEngine {
@@ -32,10 +33,20 @@ export class RecommandationEngine {
         const store = rdflib.graph();
         rdflib.parse(dcatStr, store, 'http://test', 'application/rdf+xml');
 
-        return this.graph.loadGraph(store);
+        const count = await this.graph.loadGraph(store);
+
+        console.log(`Catalog sync : added ${count} records`);
+
+        return count;
     }
 
-    getRecommandations(userId?: string, searchTerms?: string[]) {
+
+    async stats() {
+
+        return this.graph.stats();
+    }
+
+    async getRecommandations(userId?: string, searchTerms?: string[]): Promise<DatasetRecommendation[]> {
         if (userId) {
             const userProfile = this.userReg.getUserProfile(userId);
 
@@ -45,8 +56,9 @@ export class RecommandationEngine {
                 throw new Error("User does not exist");
             }
             // TODO load profile into graph
+            return [];
         } else {
-
+            return this.graph.searchDatasets({terms: searchTerms, userProfile: undefined})
         }
     }
 

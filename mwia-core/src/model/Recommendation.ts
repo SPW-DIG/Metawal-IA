@@ -9,6 +9,12 @@ export type DatasetRecommendation = {
   /** URI du dataset sujet de la recommandation */
   datasetUri: string,
 
+  /** Titre du dataset sujet de la recommandation */
+  title: string,
+
+  /** ID du dataset sujet de la recommandation */
+  id: string,
+
   /** Score */
   score: number,
 }
