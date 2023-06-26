@@ -204,20 +204,28 @@ export class KnowledgeGraph {
     async loadUserProfile(profile: PersonalProfile) {
         let mergeQuery = `
         MERGE (user:User {uri:'${profile.uri}'})
-        WITH user 
         `;
 
-        profile.browseHistory.forEach(item => {
-            mergeQuery += `
+        const browseMerges = profile.browseHistory.map(item =>  `
         MATCH (res:\`dcat:Resource\` {uri:'${item.datasetUri}'})
-        MERGE (user)-[:hasBrowsed]->(res)
-        `
-        })
+        MERGE (user)-[:hasBrowsed]->(res)`
+        ).join('\n')
+
+       if (browseMerges) mergeQuery += 'WITH user \n' + browseMerges;
 
         return this.redisGraph.query(mergeQuery).catch(err => {
             console.warn(`Cypher query failed : ${err} \n>>> ${mergeQuery}`);
             throw err;
         });
+    }
+
+    async checkUserProfile(userUri: string) {
+        let query = `
+        MATCH (user:User {uri:'${userUri}'})
+        RETURN user
+        `;
+
+        return this.redisGraph.query<{user: {properties: {uri: string}}}>(query).then(reply => !!reply.data?.length);
     }
 
     async deleteUserProfile(userUri: string) {

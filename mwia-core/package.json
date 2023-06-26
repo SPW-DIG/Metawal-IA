@@ -10,16 +10,18 @@
     "build": "yarn build-cjs && yarn build-esm",
     "build-cjs": "tsc -b . tsconfig.cjs.json",
     "build-esm": "tsc -b .",
-    "uml": "npx tsuml2 -m --glob \"./models/*.ts\" -o ./models/uml_diagram.svg"
+    "uml": "npx tsuml2 -m --glob \"./src/model/*.ts\" -o ./uml_diagram.svg",
+    "uml_profile": "npx tsuml2 -m --glob \"./src/model/PersonalProfile.ts\" -o ./uml_diagram_profile.svg",
+    "uml_reco": "npx tsuml2 -m --glob \"./src/model/Recommendation.ts\" -o ./uml_diagram_reco.svg"
   },
   "keywords": [],
   "author": "philippe@datavillage.me",
   "license": "MIT",
   "devDependencies": {
+    "imagescript": "^1.2.16",
     "typescript": "4.6.2"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "engines": {
     "node": "^16.0"
   }

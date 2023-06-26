@@ -18,8 +18,17 @@ import {Welcome} from "./pages/welcome";
 import {AdminPanel} from "./pages/admin";
 import {SolidDashboard} from "./pages/solid";
 import {SearchAndRec} from "./pages/recommandations";
+import {getPodUrls, getPublicAccess, handleHttpPromiseStatus, SPW_PATH} from "@spw-dig/mwia-core";
+import {getBackendUrl} from "./config";
+import {_404_undefined} from "@spw-dig/mwia-core/dist/esm";
 
 export type AppContextType = {
+    webId?: string;
+    podUrl?: string;
+    accessGranted?: boolean,
+    idDoc?: any;
+    registeredUser?: any;
+
     updateCtx: (update: Partial<AppContextType>) => void;
 };
 
@@ -39,16 +48,37 @@ export function AppContextProvider(props: { children: (ctx: AppContextType) => R
         })
     );
 
+    const {session} = useSession();
+
     useEffect(
         () => {
-            // TODO init ctx
+            if (session.info.isLoggedIn && session.info.webId) {
+                getPodUrls(session.info.webId, {fetch: session.fetch}).then(urls => urls[0])
+                    .then(async (podUrl) => {
+                        const access = await getPublicAccess(podUrl + SPW_PATH, session.fetch).catch(err => undefined) || undefined;
+                        const idDoc = await session.fetch(session.info.webId!, {headers: {'Accept': 'text/turtle'}}).then(resp => resp.text());
+                        const registeredUser = await fetch(getBackendUrl("/user", {userUri: session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
 
-            appContext.updateCtx({
-                /* */
-            });
+                        appContext.updateCtx({
+                            podUrl,
+                            accessGranted: access?.read && access?.write,
+                            idDoc,
+                            registeredUser,
+                            webId: session.info.webId
+                        });
+                    })
+            } else {
+                appContext.updateCtx({
+                    webId: undefined,
+                    podUrl: undefined,
+                    registeredUser: undefined,
+                    idDoc: undefined,
+                    accessGranted: false
+                });
+            }
         },
         // run this only once
-        []
+        [session, session.info.webId]
     );
 
     return <AppContext.Provider value={appContext}>{props.children(appContext)}</AppContext.Provider>;
@@ -90,11 +120,6 @@ export const AppNavBar = () => {
                             Admin
                         </NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink href="/belfius_extension.zip">
-                            Extension
-                        </NavLink>
-                    </NavItem>
 
                 </Nav>
                 <Nav className="mr-auto">
@@ -110,7 +135,7 @@ export const AppNavBar = () => {
                                     </Button>
                                 </LogoutButton>
                             </div>
-                        ) : null}
+                        ) : <LoginMultiButton/>}
                     </NavItem>
                 </Nav>
             </Collapse>
@@ -134,7 +159,7 @@ function removeTrailingSlash(url: string) {
 }
 
 export const LoginMultiButton = () => {
-    const [issuer, setIssuer] = useState("https://solidcommunity.net/");
+    const [issuer, setIssuer] = useState("https://login.inrupt.com/");
 
     return (
         <LoginButton
@@ -152,7 +177,7 @@ export const LoginMultiButton = () => {
             onError={console.log}
         >
             <Button variant="contained" color="primary">
-                Log in with
+                Log in with&nbsp;
                 <Select
                     value={issuer}
                     onChange={(e) => {
@@ -168,28 +193,30 @@ export const LoginMultiButton = () => {
 };
 
 
-
-
 const routes = [
     {
         component: Welcome,
         exact: true,
-        path: '/'
+        path: '/',
+        requiresAuth: false
     },
     {
         component: SearchAndRec,
         exact: false,
-        path: '/search'
+        path: '/search',
+        requiresAuth: false
     },
     {
         component: SolidDashboard,
         exact: false,
-        path: '/solid'
+        path: '/solid',
+        requiresAuth: true
     },
     {
         component: AdminPanel,
         exact: false,
-        path: '/admin'
+        path: '/admin',
+        requiresAuth: true
     }
 ];
 
@@ -205,7 +232,9 @@ export const App = () => {
                                     <Switch>
                                         {routes.map((route, i) => (
                                             <Route exact={route.exact} path={route.path} key={i}>
-                                                <route.component/>
+                                                {(route.requiresAuth && !ctx.webId) ? <div>Please login</div> :
+                                                    <route.component/>}
+
                                             </Route>
                                         ))}
                                     </Switch>

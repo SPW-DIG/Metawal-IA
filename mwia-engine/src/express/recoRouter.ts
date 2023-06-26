@@ -8,11 +8,11 @@ export const RecommandationRouter = () => {
     /**
      * Return the full EPC document by URI
      */
-    router.get('/', async (req: Request<void, DatasetRecommendation[], void, { search: string, userId?: string }>, res) => {
+    router.get('/', async (req: Request<void, DatasetRecommendation[], void, { search: string, userId?: string, force: boolean }>, res) => {
         const engine = getRecoEngine(req.app);
 
         // TODO
-        const recos = await engine.getRecommandations(req.query.userId, req.query.search.split(' '));
+        const recos = await engine.getRecommandations(req.query.userId, req.query.search.split(' '), new Boolean(req.query.force).valueOf());
 
         res.json(recos);
     });

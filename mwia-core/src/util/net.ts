@@ -1,3 +1,4 @@
+import {UndefinedError} from "./errors";
 
 export class HttpError extends Error {
     status: number;
@@ -62,4 +63,13 @@ export async function handleHttpPromiseStatus(res: Response): Promise<Response> 
 
 export function safeFetch(fetchFn: typeof fetch = fetch) {
     return (...args: Parameters<typeof fetch>) => fetchFn(...args).then(handleHttpPromiseStatus);
+}
+
+/**
+ * Catches 404 errors and returns undefined
+ * @param err
+ */
+export async function _404_undefined(err: any): Promise<undefined> {
+    if (err?.status == 404 || err instanceof UndefinedError) return undefined;
+    else throw err;
 }

@@ -200,7 +200,7 @@ test('Insert and delete user profile', async () => {
 
   const kg = new KnowledgeGraph(redis, 'metawal');
 
-  const profile = userReg.getUserProfile("https://geoportail.wallonie.be/users/user002");
+  const profile = await userReg.getUserProfile("https://geoportail.wallonie.be/users/user002");
 
   assert(profile);
 

@@ -26,7 +26,7 @@ flowchart TB
 
 Les sources commentées du modèle objet sont dans [./models/](./models).
 
-![](./models/uml_diagram.svg)
+![](./mwia-core/uml_diagram.svg)
 
 ## Sample data
 
@@ -94,7 +94,7 @@ REST DCAT :
 https://metawal.wallonie.be/geonetwork/srv/fre/catalog.search#/metadata/986366ec-7dc3-4c80-8e52-44de19ddd198
 
 CSW DCAT :
-- no clear 'Service' attribute, encoded as `rdf:Description`
+- no clear 'Application' attribute, encoded as `rdf:Description`
 
 REST DCAT :
 - encoded as `dcat:Dataset` , but `dct:type -> DataService`
@@ -183,6 +183,60 @@ GRAPH.QUERY metawal "
     UNWIND allMatches as match
     RETURN DISTINCT match.res.uri, match.res.`http://purl.org/dc/terms/title`, COUNT(match.res.uri) as test, SUM(match.score) as score ORDER BY score
 ```
+
+
+
+
+Combine full text searches on tag and Datasets, and user browse history
+```
+    MATCH (user)-[:hasBrowsed]->(res3:`dcat:Resources`)
+    WITH COLLECT({res: res3, score: 10}) as browseMatches
+    CALL db.idx.fulltext.queryNodes('skos:Concept', 'inondation') YIELD node as tag, score
+    MATCH (res1:`dcat:Dataset`)-[:`dcat:theme`]->(tag)
+    WITH browseMatches, COLLECT({res: res1, score: score}) as conceptMatches
+    CALL db.idx.fulltext.queryNodes('dcat:Resource', 'inondation') YIELD node as res2, score
+    MATCH (res2:`dcat:Dataset`)
+    WITH browseMatches, conceptMatches, COLLECT({res: res2, score: score}) as textMatches
+    WITH browseMatches + conceptMatches + textMatches as allMatches
+    UNWIND allMatches as match
+    RETURN DISTINCT match.res.uri, SUM(match.score) as score ORDER BY score DESC
+    LIMIT 20
+```
+
+Merge dct:relation into relations between datasets
+```
+    MATCH (res1:`dcat:Resource`)-[:`dct:relation`]-(rec:`dcat:CatalogRecord`)-[:`dct:relation`]-(res2:`dcat:Resource`)
+    WHERE res1 <> res2
+    MERGE (res1)-[:`dct:dsrelation`]-(res2)
+```
+
+
+Find all datasets linked to a user browsingn history via dct:dsrelation
+```
+    MATCH (user:User)-[:hasBrowsed]-()-[p:`dct:dsrelation`*..2]-(o:`dcat:Resource`)
+    WITH user, relationships(p) as rels, collect(o) as nodes
+    UNWIND rels as rel
+    UNWIND nodes as node
+    RETURN user, rel, node LIMIT 100
+```
+
+
+Combine full text searches on tag and Datasets, and inferences from user browse history
+```
+    MATCH (user:User)-[:hasBrowsed]-()-[p:`dct:dsrelation`*..2]-(res3:`dcat:Resource`)
+    WITH COLLECT({res: res3, score: 5}) as browseMatches
+    CALL db.idx.fulltext.queryNodes('skos:Concept', 'inondation') YIELD node as tag, score
+    MATCH (res1:`dcat:Dataset`)-[:`dcat:theme`]->(tag)
+    WITH browseMatches, COLLECT({res: res1, score: score}) as conceptMatches
+    CALL db.idx.fulltext.queryNodes('dcat:Resource', 'inondation') YIELD node as res2, score
+    MATCH (res2:`dcat:Dataset`)
+    WITH browseMatches, conceptMatches, COLLECT({res: res2, score: score}) as textMatches
+    WITH browseMatches + conceptMatches + textMatches as allMatches
+    UNWIND allMatches as match
+    RETURN DISTINCT match.res.uri, SUM(match.score) as score ORDER BY score DESC
+    LIMIT 20
+```
+
 
 
 

@@ -46,20 +46,30 @@ export class RecommandationEngine {
         return this.graph.stats();
     }
 
-    async getRecommandations(userId?: string, searchTerms?: string[]): Promise<DatasetRecommendation[]> {
+    async getRecommandations(userId?: string, searchTerms?: string[], reloadProfile?: boolean): Promise<DatasetRecommendation[]> {
         if (userId) {
-            const userProfile = this.userReg.getUserProfile(userId);
+            let mark = new Date().getTime();
+
+            const userProfile = await this.userReg.getUserProfile(userId);
+
+            console.log(`[PERF] Profile Fetch : ${new Date().getTime()-mark}`);
 
             if (userProfile) {
-
+                // TODO check if profile already loaded
+                const isProfileLoaded = await this.graph.checkUserProfile(userId);
+                if (!isProfileLoaded || reloadProfile) {
+                    mark = new Date().getTime();
+                    await this.graph.loadUserProfile(userProfile);
+                    console.log(`[PERF] Profile load : ${new Date().getTime()-mark}`);
+                }
             } else {
                 throw new Error("User does not exist");
             }
 
-            // TODO load profile into graph
-
-
-            return this.graph.searchDatasets({terms: searchTerms, userId})
+            mark = new Date().getTime();
+            const results = this.graph.searchDatasets({terms: searchTerms, userId});
+            console.log(`[PERF] Reco Search : ${new Date().getTime()-mark}`);
+            return results;
         } else {
             return this.graph.searchDatasets({terms: searchTerms})
         }

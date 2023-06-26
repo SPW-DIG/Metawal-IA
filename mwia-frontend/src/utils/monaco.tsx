@@ -4,7 +4,7 @@ import * as monaco from 'monaco-editor';
 //import './monaco.ttl';
 import "@datavillage-me/monaco-language-turtle";
 import * as rdflib from 'rdflib';
-import {CONTENT_TYPES} from "@spw-dig/mwia-core/dist/esm/model/convert";
+import {CONTENT_TYPES} from "@spw-dig/mwia-core";
 
 
 // @ts-ignore
@@ -47,10 +47,11 @@ function parseRdf(str: string) {
   return store;
 }
 
-export const MonacoEditor = (props: {text: string, onChange?: (newText: string) => void}) => {
+export const MonacoEditor = (props: {text: string, onChange?: (newText: string) => void, language?: string}) => {
   const divEl = useRef<HTMLDivElement>(null);
   let editor: monaco.editor.IStandaloneCodeEditor;
 
+  const language = props.language || 'turtle';
 
   useEffect(() => {
     if (divEl.current) {
@@ -58,16 +59,17 @@ export const MonacoEditor = (props: {text: string, onChange?: (newText: string) 
       editor?.dispose();
       editor = monaco.editor.create(divEl.current, {
         //hover: {sticky: false},
-        theme: 'turtleTheme',
+        theme: language == 'turtle' ? 'turtleTheme' : undefined,
         value: props.text,
-        language: 'turtle',
+        language,
         wordWrap: 'on'
       });
       editor.onDidChangeModelContent((e) => {
         props.onChange && props.onChange(editor.getValue());
-        (editor.getModel() as any).rdfGraph = parseRdf(editor.getValue());
+        if (language == 'turtle') (editor.getModel() as any).rdfGraph = parseRdf(editor.getValue());
       });
-      (editor.getModel() as any).rdfGraph = parseRdf(props.text);
+
+      if (language == 'turtle')(editor.getModel() as any).rdfGraph = parseRdf(props.text);
     }
 
     return () => {

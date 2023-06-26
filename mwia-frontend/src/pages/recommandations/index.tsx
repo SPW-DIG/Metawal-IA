@@ -1,8 +1,8 @@
 import {useSession} from "@inrupt/solid-ui-react";
 import * as React from "react";
-import {LoginMultiButton} from "../../index";
+import {AppContext, LoginMultiButton} from "../../index";
 import {TextField} from "@material-ui/core";
-import {useCallback, useState} from "react";
+import {useCallback, useContext, useState} from "react";
 import {DatasetRecommendation} from "@spw-dig/mwia-core";
 import {getBackendUrl} from "../../config";
 import {Switch as MuiSwitch} from '@material-ui/core';
@@ -28,6 +28,7 @@ export const SearchAndRec = () => {
 
 export const SearchDatasets = () => {
 
+    const appCtx = useContext(AppContext);
     const [useProfile, setUseProfile] = useState(false);
 
     const [recos, setRecos] = useState<DatasetRecommendation[]>([]);
@@ -36,7 +37,7 @@ export const SearchDatasets = () => {
         let recos: DatasetRecommendation[] = [];
 
         if (searchText) {
-            const resp = await fetch(getBackendUrl("/recommandations", {search: searchText, userId: useProfile ? 'https://geoportail.wallonie.be/users/user002' : undefined}));
+            const resp = await fetch(getBackendUrl("/recommandations", {force: true, search: searchText, userId: useProfile ? (appCtx.webId || 'https://geoportail.wallonie.be/users/user002') : undefined}));
             recos = (await resp.json()) as DatasetRecommendation[];
         }
 

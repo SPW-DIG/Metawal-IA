@@ -20,6 +20,24 @@ import {
     universalAccess
 } from "@inrupt/solid-client";
 
+
+export async function grantPublicAccess(path: string, fetchFn: typeof fetch = fetch) {
+    universalAccess.setPublicAccess(
+        path,
+        { read: true, write: true },
+        { fetch: fetchFn }
+    )
+}
+
+export async function getPublicAccess(path: string | undefined, fetchFn: typeof fetch = fetch) {
+    return path && universalAccess.getPublicAccess(
+        path,
+        { fetch: fetchFn }
+    )
+}
+
+
+
 export async function getAcrDataset(podUrl: string, options?: { fetch: typeof fetch }) {
     let acrUrl: string | null = null;
     const resourceInfo = await acp_ess_1.getResourceInfoWithAcr(podUrl, options);
