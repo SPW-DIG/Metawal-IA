@@ -2,10 +2,9 @@ import express, {Application} from 'express';
 import {RecommandationRouter} from "./recoRouter";
 import {RecommandationEngine} from "../engine/engine";
 import {AdminRouter} from "./adminRouter";
-import {ErrorHandler} from "./utils";
 import {UsersRegistry} from "../users/pds";
 import {UserRouter} from "./userRouter";
-
+import createRouter from 'express-promise-router';
 
 export function getRecoEngine(app: Application) {
     return app.get("recoEngine") as RecommandationEngine;
@@ -31,11 +30,12 @@ export function createRecommandationServer(userRegistry: UsersRegistry, engine: 
         next();
     });
 
-    app.use("/recommandations", RecommandationRouter());
-    app.use("/admin", AdminRouter());
-    app.use("/user", UserRouter());
+    const router = createRouter();
+    app.use(router);
 
-    app.use(ErrorHandler);
+    router.use("/recommandations", RecommandationRouter());
+    router.use("/admin", AdminRouter());
+    router.use("/user", UserRouter());
 
     return app;
 }

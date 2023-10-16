@@ -1,8 +1,9 @@
-import express, {Request} from "express";
+import {Request} from "express";
 import {getRecoEngine} from "./index";
+import createRouter from 'express-promise-router';
 
 export const AdminRouter = () => {
-    const router = express.Router();
+    const router = createRouter();
 
 
     /**

@@ -5,7 +5,7 @@ import {usePromiseFn} from "../../utils/hooks";
 import {PromiseStateContainer} from "../../utils/ui-utils";
 
 async function syncCatalog() {
-    const url = getBackendUrl("/admin/graph/sync");
+    const url = getBackendUrl("admin/graph/sync");
     const resp = await fetch(url, {method: 'POST'});
     return resp.text();
 }
@@ -13,7 +13,7 @@ async function syncCatalog() {
 export const AdminPanel = () => {
 
     const stats = usePromiseFn( async () => {
-        const url = getBackendUrl("/admin/graph/stats");
+        const url = getBackendUrl("admin/graph/stats");
         const resp = await fetch(url);
         return await resp.json() as {
             datasets: number,

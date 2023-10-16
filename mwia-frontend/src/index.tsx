@@ -57,7 +57,7 @@ export function AppContextProvider(props: { children: (ctx: AppContextType) => R
                     .then(async (podUrl) => {
                         const access = await getPublicAccess(podUrl + SPW_PATH, session.fetch).catch(err => undefined) || undefined;
                         const idDoc = await session.fetch(session.info.webId!, {headers: {'Accept': 'text/turtle'}}).then(resp => resp.text());
-                        const registeredUser = await fetch(getBackendUrl("/user", {userUri: session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
+                        const registeredUser = await fetch(getBackendUrl("user", {userUri: session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
 
                         appContext.updateCtx({
                             podUrl,
@@ -152,12 +152,6 @@ const ISSUERS = {
     "http://localhost:3000/": "Localhost Solid"
 }
 
-function removeTrailingSlash(url: string) {
-    if (url.endsWith('/')) url = url.substring(0, url.length - 1);
-
-    return url;
-}
-
 export const LoginMultiButton = () => {
     const [issuer, setIssuer] = useState("https://login.inrupt.com/");
 
@@ -173,7 +167,7 @@ export const LoginMultiButton = () => {
             }
             oidcIssuer={issuer}
             // this is the ID issuer for the DNB sandbox
-            redirectUrl={removeTrailingSlash(new URL("/", window.location.href).toString())}
+            redirectUrl={ window.location.href.split('#')[0] /* new URL("/", window.location.href ).toString()*/}
             onError={console.log}
         >
             <Button variant="contained" color="primary">

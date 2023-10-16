@@ -37,7 +37,7 @@ export const SearchDatasets = () => {
         let recos: DatasetRecommendation[] = [];
 
         if (searchText) {
-            const resp = await fetch(getBackendUrl("/recommandations", {force: true, search: searchText, userId: useProfile ? (appCtx.webId || 'https://geoportail.wallonie.be/users/user002') : undefined}));
+            const resp = await fetch(getBackendUrl("recommandations", {force: true, search: searchText, userId: useProfile ? (appCtx.webId || 'https://geoportail.wallonie.be/users/user002') : undefined}));
             recos = (await resp.json()) as DatasetRecommendation[];
         }
 

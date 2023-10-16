@@ -21,7 +21,9 @@
     "imagescript": "^1.2.16",
     "typescript": "4.6.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@inrupt/solid-client": "^1.23.3"
+  },
   "engines": {
     "node": "^16.0"
   }

@@ -1,32 +1,14 @@
-FROM node:16-alpine AS BUILD_IMAGE
+FROM node:16-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json yarn.lock ./
+COPY dist/standalone/package.json dist/standalone/yarn.lock ./
 
-RUN yarn --frozen-lockfile
-# If you are building your code for production
-# RUN npm ci --only=production
+RUN yarn --frozen-lockfile --prod
 
-# Bundle app source
-COPY . .
+COPY dist/standalone/ ./
 
-# build application
-RUN yarn build
-
-# remove development dependencies
-RUN npm prune --production
-
-
-
-FROM node:16-alpine
-
-WORKDIR /usr/src/app
-
-# copy from build image
-COPY --from=BUILD_IMAGE /usr/src/app/dist ./dist
-COPY --from=BUILD_IMAGE /usr/src/app/node_modules ./node_modules
-
-ENTRYPOINT ["node", "dist/index.js"]
+EXPOSE 5000
+ENTRYPOINT ["node", "index.js"]

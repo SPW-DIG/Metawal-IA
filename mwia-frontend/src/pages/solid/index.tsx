@@ -47,7 +47,7 @@ function a11yProps(index: number) {
 
 
 async function registerUser(webId: string, podUrl: string, fetchFn: typeof fetch) {
-    await fetch(getBackendUrl("/user/register", {userUri: webId, podUri: podUrl}).toString(),{method: 'POST'});
+    await fetch(getBackendUrl("user/register", {userUri: webId, podUri: podUrl}).toString(),{method: 'POST'});
 
     await initSpwFolder(podUrl, {name: "New User"}, fetchFn);
 }

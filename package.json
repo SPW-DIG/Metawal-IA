@@ -13,8 +13,8 @@
     "license": "MIT",
     "workspaces": [
         "mwia-core",
-        "mwia-engine",
-        "mwia-frontend"
+        "mwia-frontend",
+        "mwia-engine"
     ],
     "devDependencies": {
         "shx": "^0.3.4",
