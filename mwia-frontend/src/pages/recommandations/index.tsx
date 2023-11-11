@@ -1,25 +1,26 @@
-import {useSession} from "@inrupt/solid-ui-react";
 import * as React from "react";
-import {AppContext, LoginMultiButton} from "../../index";
 import {TextField} from "@material-ui/core";
-import {useCallback, useContext, useState} from "react";
+import {useCallback, useState} from "react";
 import {DatasetRecommendation} from "@spw-dig/mwia-core";
 import {getBackendUrl} from "../../config";
 import {Switch as MuiSwitch} from '@material-ui/core';
+import {DEFAULT_AUTH} from '../../auth';
+
+const auth = DEFAULT_AUTH;
 
 export const SearchAndRec = () => {
-    const {session} = useSession();
+    const session = auth.useSession();
 
     return (
         <div>
             <h2>Recherche</h2>
             <SearchDatasets/>
             <h2>Recommandations</h2>
-            {session.info.isLoggedIn ?
+            {session.isLoggedIn ?
                 <Recommandations/> :
                 <div>
                     Please log in
-                    <LoginMultiButton/>
+                    <auth.LoginButton/>
                 </div>
             }
         </div>
@@ -28,7 +29,8 @@ export const SearchAndRec = () => {
 
 export const SearchDatasets = () => {
 
-    const appCtx = useContext(AppContext);
+    const session = auth.useSession();
+
     const [useProfile, setUseProfile] = useState(false);
 
     const [recos, setRecos] = useState<DatasetRecommendation[]>([]);
@@ -37,7 +39,7 @@ export const SearchDatasets = () => {
         let recos: DatasetRecommendation[] = [];
 
         if (searchText) {
-            const resp = await fetch(getBackendUrl("recommandations", {force: true, search: searchText, userId: useProfile ? (appCtx.webId || 'https://geoportail.wallonie.be/users/user002') : undefined}));
+            const resp = await fetch(getBackendUrl("recommandations", {force: true, search: searchText, userId: useProfile ? session.userId : undefined}));
             recos = (await resp.json()) as DatasetRecommendation[];
         }
 

@@ -1,9 +1,8 @@
 import * as React from "react";
-import {AppContext, LoginMultiButton} from "../../index";
-import {useContext} from "react";
+import {DEFAULT_AUTH} from "../../auth";
 
 export const Welcome = () => {
-    const appCtx = useContext(AppContext);
+    const session = DEFAULT_AUTH.useSession();
 
     //const podUrl$ = usePromiseFn(async () => session.info.webId ? getPodUrls(session.info.webId, {fetch: session.fetch}).then(urls => urls?.length ? urls[0] : undefined) : undefined, [session.fetch, session.info.webId]);
 
@@ -11,17 +10,16 @@ export const Welcome = () => {
         <div>
             <h2>Welcome to the Metawal Personal Dashboard</h2>
             <div>
-                This dashboard displays various informations abouit your personal profile at Metawal, your recommandations and your Solid account.
+                This dashboard displays various informations about your personal profile at Metawal, your recommandations and your Solid account.
             </div>
             <br/>
-            {appCtx.webId ?
+            {session.userId ?
                 <div>
-                    <div>You are logged in as {appCtx.webId}</div>
-                    <div>Your pod URL is {appCtx.podUrl}</div>
+                    <div>You are logged in as {session.userId}</div>
                 </div> :
                 <div>
                     Please log in using Solid
-                    <LoginMultiButton/>
+                    <DEFAULT_AUTH.LoginButton/>
                 </div>
             }
         </div>

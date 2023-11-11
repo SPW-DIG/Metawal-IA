@@ -1,13 +1,12 @@
 import {getResourceInfo} from "@inrupt/solid-client";
-import {_404_undefined, grantPublicAccess, handleHttpPromiseStatus} from "../util";
+import {_404_undefined, handleHttpPromiseStatus} from "../util";
 import {
     ContactInfo,
     PersonalProfile
 } from "../model";
 
-export const SPW_PATH = "spw/";
-export const PROFILE_PATH = SPW_PATH + "profile.json";
-export const RECOMMANDATIONS_PATH = SPW_PATH + "recommandations.json";
+export const PROFILE_PATH = "profile.json";
+export const RECOMMANDATIONS_PATH = "recommandations.json";
 
 
 export type PodPersonalProfile = Omit<PersonalProfile, 'uri'>;
@@ -30,23 +29,26 @@ export const createEmptyProfile = (contactInfo: ContactInfo): PodPersonalProfile
     savedMaps: []
 })
 
-export async function initSpwFolder(podUrl: string, contactInfo: ContactInfo, fetchFn: typeof fetch = fetch) {
+export async function initSpwFolder(folderUrl: string, contactInfo: ContactInfo, fetchFn: typeof fetch = fetch) {
 
-    const folder = await getResourceInfo(podUrl + SPW_PATH, {fetch: fetchFn}).catch(err => {
+    const folder = await getResourceInfo(folderUrl, {fetch: fetchFn}).catch(err => {
         if (err.response.status == 404) return undefined;
         else throw err;
     });
 
     if (!folder) {
-        await fetchFn(podUrl + SPW_PATH + "README.md", {body: "# Metawal-IA folder", method: 'PUT'});
+        await fetchFn(folderUrl + "README.md", {body: "# Metawal-IA folder", method: 'PUT'});
     }
 
-    await initMetawalProfile(podUrl + PROFILE_PATH,contactInfo,fetchFn);
+    await initMetawalProfile(folderUrl + PROFILE_PATH,contactInfo,fetchFn);
 
+    /*  TODO should there be some specific rights set on folder at init ?
     await grantPublicAccess(
-        podUrl + SPW_PATH,
+        folderUrl,
         fetchFn
     )
+
+     */
 }
 
 export async function initMetawalProfile(profileUrl: string, contactInfo: ContactInfo, fetchFn: typeof fetch = fetch, reset?:boolean) {

@@ -12,7 +12,9 @@ export const UserRouter = () => {
     router.post('/register', async (req: Request<void, void, void, {userUri: string, podUri: string}>, res) => {
         const registry = getUsersRegistry(req.app);
 
-        registry.registerUser({uri: req.query.userUri, podUri: req.query.podUri});
+        await registry.registerUser({uri: req.query.userUri, podUri: req.query.podUri});
+
+        registry.getUserAppStorage(req.query.userUri).then(store => store.resetStorage({name: ''}))
 
         res.json();
     });
@@ -24,7 +26,7 @@ export const UserRouter = () => {
     router.get('/', async (req: Request<void, PersonalProfile, void, {userUri: string}>, res) => {
         const registry = getUsersRegistry(req.app);
 
-        const profile = await registry.getUser(req.query.userUri);
+        const profile = await registry.getUserAppStorage(req.query.userUri).then(store => store.getUserProfile());
 
         if (profile)
             res.json(profile);
@@ -42,7 +44,7 @@ export const UserRouter = () => {
         //  TODO get userId from request (auth headers ?)
         const userId = "https://geoportail.wallonie.be/users/user002";
 
-        const profile = await registry.getUserProfile(userId);
+        const profile = await registry.getUserAppStorage(userId).then(store => store.getUserProfile())
 
         res.json(profile);
     });

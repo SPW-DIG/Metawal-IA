@@ -50,7 +50,7 @@ export class RecommandationEngine {
         if (userId) {
             let mark = new Date().getTime();
 
-            const userProfile = await this.userReg.getUserProfile(userId);
+            const userProfile = await this.userReg.getUserAppStorage(userId).then(store => store.getUserProfile());
 
             console.log(`[PERF] Profile Fetch : ${new Date().getTime()-mark}`);
 

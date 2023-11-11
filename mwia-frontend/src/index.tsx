@@ -2,7 +2,7 @@ import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import {HashRouter, Link, Route, Switch} from 'react-router-dom';
 import './app.scss';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {
     Collapse,
     Nav,
@@ -12,31 +12,31 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
-import {LoginButton, LogoutButton, SessionProvider, useSession} from '@inrupt/solid-ui-react';
-import {Button, MenuItem, Select} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 import {Welcome} from "./pages/welcome";
 import {AdminPanel} from "./pages/admin";
 import {SolidDashboard} from "./pages/solid";
 import {SearchAndRec} from "./pages/recommandations";
-import {getPodUrls, getPublicAccess, handleHttpPromiseStatus, SPW_PATH} from "@spw-dig/mwia-core";
-import {getBackendUrl} from "./config";
-import {_404_undefined} from "@spw-dig/mwia-core/dist/esm";
+
+import {DEFAULT_AUTH} from './auth';
 
 export type AppContextType = {
-    webId?: string;
-    podUrl?: string;
-    accessGranted?: boolean,
-    idDoc?: any;
-    registeredUser?: any;
+    //webId?: string;
+    //podUrl?: string;
+    //accessGranted?: boolean,
+    //idDoc?: any;
+    //registeredUser?: any;
 
     updateCtx: (update: Partial<AppContextType>) => void;
 };
 
+/*
 function createInitAppContext(updateAppContextFn: (update: Partial<AppContextType>) => void, basemap?: string): AppContextType {
     return {
         updateCtx: updateAppContextFn
     };
 }
+
 
 export const AppContext = React.createContext<AppContextType>(createInitAppContext(() => null));
 
@@ -48,23 +48,23 @@ export function AppContextProvider(props: { children: (ctx: AppContextType) => R
         })
     );
 
-    const {session} = useSession();
+    const session = auth.useSession();
 
     useEffect(
         () => {
-            if (session.info.isLoggedIn && session.info.webId) {
-                getPodUrls(session.info.webId, {fetch: session.fetch}).then(urls => urls[0])
+            if (session.isLoggedIn && session.userId) {
+                getPodUrls(session.userId, {fetch: session.fetch}).then(urls => urls[0])
                     .then(async (podUrl) => {
                         const access = await getPublicAccess(podUrl + SPW_PATH, session.fetch).catch(err => undefined) || undefined;
-                        const idDoc = await session.fetch(session.info.webId!, {headers: {'Accept': 'text/turtle'}}).then(resp => resp.text());
-                        const registeredUser = await fetch(getBackendUrl("user", {userUri: session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
+                        const idDoc = await session.fetch(session.userId!, {headers: {'Accept': 'text/turtle'}}).then(resp => resp.text());
+                        const registeredUser = await fetch(getBackendUrl("user", {userUri: session.userId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
 
                         appContext.updateCtx({
                             podUrl,
                             accessGranted: access?.read && access?.write,
                             idDoc,
                             registeredUser,
-                            webId: session.info.webId
+                            webId: session.userId
                         });
                     })
             } else {
@@ -78,15 +78,17 @@ export function AppContextProvider(props: { children: (ctx: AppContextType) => R
             }
         },
         // run this only once
-        [session, session.info.webId]
+        [session, session.userId]
     );
 
     return <AppContext.Provider value={appContext}>{props.children(appContext)}</AppContext.Provider>;
 }
 
+ */
+
 export const AppNavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const {session} = useSession();
+    const session = DEFAULT_AUTH.useSession();
 
     const toggle = () => setIsOpen(!isOpen);
 
@@ -109,7 +111,7 @@ export const AppNavBar = () => {
                             Search
                         </NavLink>
                     </NavItem>
-                    {session.info.isLoggedIn ?
+                    {session.isLoggedIn ?
                         <NavItem>
                             <NavLink tag={Link} to="/solid">
                                 Dashboard
@@ -124,65 +126,22 @@ export const AppNavBar = () => {
                 </Nav>
                 <Nav className="mr-auto">
                     <NavItem>
-                        {session.info.isLoggedIn ? (
+                        {session.isLoggedIn ? (
                             <div style={{display: 'flex', flexDirection: 'row'}}>
                                 <NavLink style={{display: 'inline'}} tag={Link} to="/user">
-                                    <i className="fa fa-user"/> {session.info.webId}
+                                    <i className="fa fa-user"/> {session.userId}
                                 </NavLink>
-                                <LogoutButton>
+                                <DEFAULT_AUTH.LogoutButton>
                                     <Button variant="contained" color="primary">
                                         Log&nbsp;out
                                     </Button>
-                                </LogoutButton>
+                                </DEFAULT_AUTH.LogoutButton>
                             </div>
-                        ) : <LoginMultiButton/>}
+                        ) : <DEFAULT_AUTH.LoginButton />}
                     </NavItem>
                 </Nav>
             </Collapse>
         </Navbar>
-    );
-};
-
-const ISSUERS = {
-    //"https://openid.sandbox-pod.datanutsbedrijf.be": "DNB Sandbox",
-    "https://inrupt.net": "Inrupt.net",
-    "https://solidcommunity.net/": "Solid Community",
-    "https://login.inrupt.com/": "Inrupt Pod Spaces",
-    "https://idp.use.id/": "use.id",
-    "http://localhost:3000/": "Localhost Solid"
-}
-
-export const LoginMultiButton = () => {
-    const [issuer, setIssuer] = useState("https://login.inrupt.com/");
-
-    return (
-        <LoginButton
-            authOptions={
-                {
-                    clientName: "Geoportail",
-                    /* clientId: "https://metawal.datavillage.me/appid" */
-                    /* tokenType: 'Bearer'*/
-                    /*, popUp: true */
-                }
-            }
-            oidcIssuer={issuer}
-            // this is the ID issuer for the DNB sandbox
-            redirectUrl={ window.location.href.split('#')[0] /* new URL("/", window.location.href ).toString()*/}
-            onError={console.log}
-        >
-            <Button variant="contained" color="primary">
-                Log in with&nbsp;
-                <Select
-                    value={issuer}
-                    onChange={(e) => {
-                        setIssuer(e.target.value as string);
-                        e.stopPropagation()
-                    }}
-                >
-                    {Object.keys(ISSUERS).map(uri => <MenuItem value={uri} key={uri}>{ISSUERS[uri]}</MenuItem>)}
-                </Select>
-            </Button>
-        </LoginButton>
     );
 };
 
@@ -214,30 +173,34 @@ const routes = [
     }
 ];
 
+
 export const App = () => {
         return (
-            <SessionProvider onError={console.log}>
-                <HashRouter>
-                    <AppContextProvider>
-                        {ctx => (
-                            <div className="dashboardApp vFlow">
-                                <AppNavBar/>
-                                <div style={{padding: '20px 200px'}}>
-                                    <Switch>
-                                        {routes.map((route, i) => (
-                                            <Route exact={route.exact} path={route.path} key={i}>
-                                                {(route.requiresAuth && !ctx.webId) ? <div>Please login</div> :
-                                                    <route.component/>}
+            <DEFAULT_AUTH.SessionProvider>
+                {({session}) => (
+                    <HashRouter>
+                        { /* <AppContextProvider>
+                        {ctx => ( */ }
+                        <div className="dashboardApp vFlow">
+                            <AppNavBar/>
+                            <div style={{padding: '20px 200px'}}>
+                                <Switch>
+                                    {routes.map((route, i) => (
+                                        <Route exact={route.exact} path={route.path} key={i}>
+                                            {(route.requiresAuth && !session.userId) ? <div>Please login</div> :
+                                                <route.component/>}
 
-                                            </Route>
-                                        ))}
-                                    </Switch>
-                                </div>
+                                        </Route>
+                                    ))}
+                                </Switch>
                             </div>
-                        )}
-                    </AppContextProvider>
-                </HashRouter>
-            </SessionProvider>
+                        </div>
+                        { /*    )}
+                    </AppContextProvider> */ }
+                    </HashRouter>
+                )}
+
+            </DEFAULT_AUTH.SessionProvider>
         );
     }
 ;

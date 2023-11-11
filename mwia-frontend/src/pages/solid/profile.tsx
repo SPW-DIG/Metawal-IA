@@ -28,7 +28,7 @@ export const ProfileEditor = (props: { profileUrl: string, fetch: typeof fetch }
     return <div>
         Displaying profile at {props.profileUrl}<br/>
         <Button variant="contained" disabled={profileStr == editedStr} color="secondary" onClick={() => saveProfile(editedStr).then(() => {setProfileStr(editedStr)})}>Save</Button>
-        <Button variant="contained" color="primary" onClick={() => initMetawalProfile(props.profileUrl, {name: "New User"} , props.fetch)}>Reset</Button>
+        <Button variant="contained" color="primary" onClick={() => initMetawalProfile(props.profileUrl, {name: "New User"} , props.fetch, true)}>Reset</Button>
         <MonacoEditor text={profileStr || ''} language="json" onChange={setEditedStr}/>
     </div>
 

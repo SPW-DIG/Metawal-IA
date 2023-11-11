@@ -1,6 +1,7 @@
 import {util} from "@datavillage-me/api";
 
-export const BACKEND_URL = ""; //http://localhost:5000";
+// TODO get app backend URL from settings
+export const BACKEND_URL = new URL("./", window.location.href).toString(); //"http://localhost:5000";
 
 export function getBackendUrl(path: string, params?: Record<string, any>) {
     const url = new URL(path, util.sanitizePath(BACKEND_URL || window.location.href, 'SLASH'));
@@ -11,5 +12,5 @@ export function getBackendUrl(path: string, params?: Record<string, any>) {
 
     //url.searchParams;
 
-    return url;
+    return url.toString();
 };

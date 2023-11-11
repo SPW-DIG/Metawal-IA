@@ -16,7 +16,7 @@ export function fulltextSearch(text: string, type: string = 'dcat:Resource', lim
 
 export function fulltextSearchAndUser(text: string, userId: string, type: string = 'dcat:Resource', limit:number = 20) {
     return `
-    MATCH (:User {uri:'${userId}'})-[:hasBrowsed]-()-[p:\`dct:dsrelation\`*..1]-(res3:\`${type}\`)
+    MATCH (:User {uri:'${userId}'})-[:hasBrowsed]-()-[p:\`dct:dsrelation\`*..2]-(res3:\`${type}\`)
     WITH COLLECT({res: res3, score: 5}) as browseMatches
     CALL db.idx.fulltext.queryNodes('skos:Concept', '${text}') YIELD node as tag, score
     MATCH (res1:\`${type}\`)-[:\`dcat:theme\`]->(tag)

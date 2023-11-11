@@ -22,7 +22,7 @@
     },
     "dependencies": {},
     "engines": {
-        "node": "^16.0"
+        "node": ">16.0"
     },
     "resolutions": {
         "@types/react": "^17",

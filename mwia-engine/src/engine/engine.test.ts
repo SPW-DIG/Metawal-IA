@@ -1,8 +1,8 @@
 import {RecommandationEngine} from "./engine";
 import {createClient, RedisClientType} from "redis";
 import {KnowledgeGraph} from "./graph";
-import {DummyUsersRegistry} from "../users/pds";
 import {DummyCatalogClient} from "../catalog/catalog";
+import { DummyUsersRegistry } from "../users/dummy";
 
 jest.setTimeout(300000);
 

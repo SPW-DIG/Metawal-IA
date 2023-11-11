@@ -1,140 +1,60 @@
-import {DatasetRecommendation, PersonalProfile, PROFILE_PATH, samples, handleHttpPromiseStatus, _404_undefined} from "@spw-dig/mwia-core";
-import {Graph, RedisClientType} from "redis";
-import fetch from "node-fetch";
+import { util } from "@datavillage-me/api";
+import {
+    DatasetRecommendation,
+    PersonalProfile,
+    PROFILE_PATH,
+    handleHttpPromiseStatus,
+    _404_undefined,
+    initSpwFolder, ContactInfo
+} from "@spw-dig/mwia-core";
+import nodefetch from "node-fetch";
 
 export type User = { uri: string, podUri: string };
 
 export interface UsersRegistry {
-    getUserProfile(userId: string): Promise<PersonalProfile | undefined>;
-
-    getUserStorage(): UsersStorage;
-
     registerUser(user: User): Promise<any>;
 
     getUsers(): Promise<string[]>;
 
-    getUser(userUri: string): Promise<any>;
+    getUserAppStorage(userId: string, fetchFn?: typeof fetch): Promise<UsersStorage>;
 }
 
 export interface UsersStorage {
-    getUserProfile(podUri: string): Promise<PersonalProfile | undefined> ;
+    resetStorage(contactInfo: ContactInfo): Promise<void> ;
 
-    saveRecommandations(podUri: string, recommandations: DatasetRecommendation[]): Promise<void>;
-}
+    getUserProfile(): Promise<PersonalProfile | undefined> ;
 
-/**
- * Dummy in-memory implementation for test purposes
- */
-export class DummyUsersRegistry implements UsersRegistry, UsersStorage {
-
-    private users = {
-        [samples.LambdaUser1.uri] : samples.LambdaUser1,
-        [samples.LambdaUser2.uri] : samples.LambdaUser2,
-    }
-
-    saveRecommandations(podUri: string, recommandations: DatasetRecommendation[]): Promise<void> {
-        throw new Error("Not implemented")
-    }
-
-    getUserStorage(): UsersStorage {
-        return this;
-    }
-
-    async getUserProfile(podUri: string): Promise<PersonalProfile | undefined> {
-        return this.users[podUri];
-    }
-
-    async getUsers(): Promise<string[]> {
-        return Object.keys(this.users);
-    }
-
-    async getUser(userUri: string): Promise<any> {
-        return this.users[userUri];
-    }
-
-    registerUser(user: User): Promise<any> {
-        throw new Error("Not implemented")
-    }
-
-
+    saveRecommandations(recommandations: DatasetRecommendation[]): Promise<void>;
 }
 
 
-export class RedisUsersRegistry implements UsersRegistry {
+export class HttpUserStorage implements UsersStorage {
 
-    private redis: RedisClientType;
-    private redisGraph: Graph;
-    private userStorage: UsersStorage;
+    private userUri: string;
+    private fetchFn: typeof fetch;
+    private appFolderUri: string;
 
-    constructor(redis: RedisClientType, graphName: string = "metawalia_users") {
-        this.redis = redis;
-        this.redisGraph = new Graph(this.redis, graphName);
-        this.userStorage = new SolidUserStorage();
+    // @ts-ignore  // there's a type discrepancy between node-fetch fetch signature and the plain DOM
+    constructor(userUri: string, appFolderUri: string, fetchFn: typeof fetch = nodefetch) {
+        util.assert(appFolderUri.endsWith('/'), "App folder must end with a slash : "+appFolderUri);
+
+        this.userUri = userUri;
+        this.appFolderUri = appFolderUri;
+        this.fetchFn = fetchFn;
     }
 
-    async registerUser(user: User) {
-        let mergeQuery = `
-        MERGE (user:User {uri:'${user.uri}', podUri:'${user.podUri}'})
-        `;
-
-        return this.redisGraph.query(mergeQuery).catch(err => {
-            console.warn(`Cypher query failed : ${err} \n>>> ${mergeQuery}`);
-            throw err;
-        });
-    }
-
-    async getUsers(): Promise<string[]> {
-        let query = `
-        MATCH (user:User)
-        RETURN user.uri as uri
-        `;
-
-        const reply = await this.redisGraph.query<{ uri: string }>(query).catch(err => {
-            console.warn(`Cypher query failed : ${err} \n>>> ${query}`);
-            throw err;
-        });
-
-        return reply.data ? reply.data.map(u => u.uri) : [];
-    }
-
-    async getUser(userUri: string): Promise<any | undefined> {
-        let query = `
-        MATCH (user:User {uri:'${userUri}'})
-        RETURN user
-        `;
-
-        const reply = await this.redisGraph.query<{user: {properties: User}}>(query).catch(err => {
-            console.warn(`Cypher query failed : ${err} \n>>> ${query}`);
-            throw err;
-        });
-
-        return reply.data && reply.data.length ? reply.data[0].user.properties : undefined;
-    }
-
-    async getUserProfile(userId: string): Promise<PersonalProfile | undefined> {
-        const user = await this.getUser(userId);
-
-        const profile = user && await this.userStorage.getUserProfile(user.podUri);
-
-        return profile && {...profile, uri: userId};
-    }
-
-    getUserStorage(): UsersStorage {
-        return this.userStorage;
-    }
-}
-
-export class SolidUserStorage implements UsersStorage {
-    async getUserProfile(podUri: string): Promise<PersonalProfile | undefined> {
-
-        const profile = await fetch(podUri+PROFILE_PATH)
-            // @ts-ignore  // there's a type discrepancy between node-fetch fetch signature and the plain DOM
+    async getUserProfile(): Promise<PersonalProfile | undefined> {
+        const profile = await this.fetchFn(this.appFolderUri+PROFILE_PATH)
             .then(handleHttpPromiseStatus)
-            .then(resp => resp.json() as Promise<PersonalProfile>).catch(_404_undefined);
+            .then(resp => resp.json()).then(profile => ({...profile, uri: this.userUri} as PersonalProfile)).catch(_404_undefined);
         return profile;
     }
 
-    async saveRecommandations(podUri: string, recommandations: DatasetRecommendation[]): Promise<void> {
+    async saveRecommandations(recommandations: DatasetRecommendation[]): Promise<void> {
 
+    }
+
+    async resetStorage(contactInfo: ContactInfo) {
+        await initSpwFolder(this.appFolderUri, contactInfo, this.fetchFn);
     }
 }

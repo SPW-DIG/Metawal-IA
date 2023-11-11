@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import { KnowledgeGraph } from "./graph";
 import { createClient, Graph, RedisClientType } from "redis";
 import {XMLBuilder, XMLParser} from "fast-xml-parser";
-import {DummyUsersRegistry} from "../users/pds";
 import {assert} from "@spw-dig/mwia-core";
+import { DummyUsersRegistry } from '../users/dummy';
 
 // example ttl from https://github.com/w3c/dxwg/tree/gh-pages/dcat/examples
 
@@ -200,7 +200,7 @@ test('Insert and delete user profile', async () => {
 
   const kg = new KnowledgeGraph(redis, 'metawal');
 
-  const profile = await userReg.getUserProfile("https://geoportail.wallonie.be/users/user002");
+  const profile = await userReg.getUserAppStorage("https://geoportail.wallonie.be/users/user002").then(store => store.getUserProfile());
 
   assert(profile);
 

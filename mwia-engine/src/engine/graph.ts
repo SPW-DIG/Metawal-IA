@@ -213,6 +213,8 @@ export class KnowledgeGraph {
 
        if (browseMerges) mergeQuery += 'WITH user \n' + browseMerges;
 
+        console.log(`CYPHER QUERY - LOAD USER: ${mergeQuery}`);
+
         return this.redisGraph.query(mergeQuery).catch(err => {
             console.warn(`Cypher query failed : ${err} \n>>> ${mergeQuery}`);
             throw err;
@@ -250,7 +252,7 @@ export class KnowledgeGraph {
             return [];
         }
 
-        console.log(`CYPHER QUERY: ${cypher_query}`);
+        console.log(`CYPHER QUERY - SEARCH: ${cypher_query}`);
 
         const reply = await this.redisGraph.query<SearchResultNode>(cypher_query);
 

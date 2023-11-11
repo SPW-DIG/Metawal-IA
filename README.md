@@ -223,7 +223,7 @@ Find all datasets linked to a user browsingn history via dct:dsrelation
 
 Combine full text searches on tag and Datasets, and inferences from user browse history
 ```
-    MATCH (user:User)-[:hasBrowsed]-()-[p:`dct:dsrelation`*..2]-(res3:`dcat:Resource`)
+    MATCH (user:User{uri:'https://id.inrupt.com/pduchesne'})-[:hasBrowsed]-()-[p:`dct:dsrelation`*..2]-(res3:`dcat:Resource`)
     WITH COLLECT({res: res3, score: 5}) as browseMatches
     CALL db.idx.fulltext.queryNodes('skos:Concept', 'inondation') YIELD node as tag, score
     MATCH (res1:`dcat:Dataset`)-[:`dcat:theme`]->(tag)
@@ -238,7 +238,23 @@ Combine full text searches on tag and Datasets, and inferences from user browse 
 ```
 
 
-
+Same, with node and predicates suitable for viz
+```
+    MATCH (user:User{uri:'https://id.inrupt.com/pduchesne'})-[b:hasBrowsed]-()-[p:`dct:dsrelation`*..2]-(res3:`dcat:Resource`)
+    WITH b, user, relationships(p) as rels, COLLECT({res: res3, score: 5}) as browseMatches
+    CALL db.idx.fulltext.queryNodes('skos:Concept', 'inondation') YIELD node as tag, score
+    MATCH (res1:`dcat:Dataset`)-[:`dcat:theme`]->(tag)
+    WITH rels, b, tag, user, browseMatches, COLLECT({res: res1, score: score}) as conceptMatches
+    CALL db.idx.fulltext.queryNodes('dcat:Resource', 'inondation') YIELD node as res2, score
+    MATCH (res2:`dcat:Dataset`)
+    WITH rels, b, tag, user, browseMatches, conceptMatches, COLLECT({res: res2, score: score}) as textMatches
+    WITH rels, b, tag, user, browseMatches + conceptMatches + textMatches as allMatches
+    UNWIND allMatches as match
+    WITH rels, b, tag, user, match.res as res, match.score as score
+    UNWIND rels as rel
+    MATCH (res)-[p1]-(tag)
+    RETURN rel, b, p1, res, tag, user ORDER BY score DESC
+```
 
 
 

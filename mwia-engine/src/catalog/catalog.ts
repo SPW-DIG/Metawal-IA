@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import nodefetch from "node-fetch";
 import https from "https";
 import fs from "fs";
 
@@ -14,7 +14,7 @@ export class CswCatalogClient implements CatalogClient {
     }
 
     async getRecords<F extends string>(collection: string, start: number = 0, limit: number = 0, format: F = 'dcat' as F): Promise<F extends 'json' ? any : string>  {
-        const response = await fetch(new URL(`collections/${collection}/items?startIndex=${start}&limit=${limit}&f=${format}`, this.url).toString(), {
+        const response = await nodefetch(new URL(`collections/${collection}/items?startIndex=${start}&limit=${limit}&f=${format}`, this.url).toString(), {
             agent: new https.Agent({
                 rejectUnauthorized: false,
             })

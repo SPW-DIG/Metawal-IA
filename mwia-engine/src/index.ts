@@ -2,17 +2,26 @@ import {RedisQueue} from "./redis";
 import {createClient, RedisClientType} from "redis";
 import {KnowledgeGraph} from "./engine/graph";
 import {DummyCatalogClient} from "./catalog/catalog";
-import {RedisUsersRegistry, UsersRegistry} from "./users/pds";
+import {UsersRegistry} from "./users/pds";
 import {RecommandationEngine} from "./engine/engine";
-import {createRecommandationServer} from "./express";
+import {createRecommandationServer, getUsersRegistry} from "./express";
 
 import https from "https";
 import fs from "fs";
-import {getRemoteClient} from "@datavillage-me/api";
+import {util, getRemoteClient} from "@datavillage-me/api";
 import express from "express";
 import {ErrorHandler} from "./express/utils";
 import dotenv from 'dotenv';
 import {RedisClientOptions} from "@redis/client";
+import {DatavillageUsersRegistry} from "./users/datavillage";
+import { RedisUsersRegistry } from "./users/redis";
+
+const originalWarn = console.warn;
+console.warn = (msg, ...params) => originalWarn(`\x1b[33m${msg}\x1b[0m`, ...params)
+const originalError = console.error;
+console.error = (msg, ...params) => originalError(`\x1b[31m${msg}\x1b[0m`, ...params)
+const originalDebug = console.debug;
+console.debug = (msg, ...params) => originalDebug(`\x1b[90m${msg}\x1b[0m`, ...params)
 
 dotenv.config();
 
@@ -27,8 +36,6 @@ const config = {
     REDIS_TLS: process.env.REDIS_TLS
 }
 
-const dvClient = config.DV_URL ? getRemoteClient(config.DV_URL, config.DV_TOKEN) : undefined;
-
 export const TestRouter = () => {
     const router = express.Router();
 
@@ -36,8 +43,8 @@ export const TestRouter = () => {
         res.json(config);
     });
 
-    router.get('/users', (req, res) => {
-        res.json(dvClient?.getClientsServices().getApplicationActiveUsers(config.DV_CLIENT_ID!, config.DV_APP_ID!));
+    router.get('/users', async (req, res) => {
+        res.json(await getUsersRegistry(req.app).getUsers());
     });
 
     return router;
@@ -61,11 +68,26 @@ export async function startRedis(engine: RecommandationEngine) {
     await queue.redis.connect();
 }
 
+// TODO strong-type these
+let serverSettings: {
+    "DV_APP_ID": string,
+    "DV_CLIENT_ID": string,
+    "DV_SETTINGS" : {
+        apiUrl: string,
+        loginUrl: string,
+        passportUrl: string,
+        consoleUrl: string,
+    }
+} | undefined = undefined;
+
 export async function startExpress(userRegistry: UsersRegistry, engine: RecommandationEngine) {
     const useHttps = !!(process.env.TLS_CERTFILE && process.env.TLS_KEYFILE);
 
     const app = createRecommandationServer(userRegistry, engine);
     app.use("/test", TestRouter());
+    app.get("/settings.json", (req, res) => {
+        res.json(serverSettings);
+    });
     app.use(express.static(__dirname + '/static'));
     app.use(ErrorHandler);
 
@@ -83,6 +105,8 @@ export async function startExpress(userRegistry: UsersRegistry, engine: Recomman
 
         // Do post-start init
     });
+
+    return server;
 }
 
 const useRedisHttps = config.TLS_CAFILE || new Boolean(config.REDIS_TLS).valueOf();
@@ -118,8 +142,43 @@ redis.connect()
     })
     .then(async () => {
         console.log('Connected to Redis');
-        console.log(await redis.INFO());
-        const usersReg = new RedisUsersRegistry(redis); // new DummyUsersRegistry();
+        //console.log(await redis.INFO());
+
+        let usersReg: UsersRegistry;
+        if (config.DV_URL && config.DV_TOKEN && config.DV_CLIENT_ID && config.DV_APP_ID) {
+            try {
+                const dvServerMetadata = await fetch(new URL("metadata.json", config.DV_URL).toString()).then(resp => resp.json());
+                const dvServerSettings = await fetch(new URL("service.json", config.DV_URL).toString()).then(resp => resp.json());
+
+                serverSettings = {
+                    "DV_APP_ID": config.DV_APP_ID,
+                    "DV_CLIENT_ID": config.DV_CLIENT_ID,
+                    "DV_SETTINGS": dvServerSettings
+                }
+
+                const dvClient = getRemoteClient(config.DV_URL, config.DV_TOKEN);
+                console.log(`Datacage deployment - using DV Platform at ${config.DV_URL} for client ${config.DV_CLIENT_ID}, app ${config.DV_APP_ID}`);
+                console.log(`DV Backend version ${dvServerMetadata.npm_version} (${dvServerMetadata.git_ref}) built on ${dvServerMetadata.build_date}`);
+                console.log(`DV Public API URL  ${serverSettings.DV_SETTINGS.apiUrl}`);
+                console.log(`DV Passport URL    ${serverSettings.DV_SETTINGS.passportUrl}`);
+                console.log(`DV Console URL     ${serverSettings.DV_SETTINGS.consoleUrl}`);
+
+                // check the connectivity to the DV backend and the validity of the credentials
+                const credentials = await dvClient.getPassport().getCurrentCredentials().catch(err => {
+                    throw new util.WrappedError("Failed to connect to DV backend", err)
+                });
+                console.debug("Connected to DV backend with credentials : " + JSON.stringify(credentials));
+                if (credentials?.spaceId != config.DV_APP_ID) {
+                    console.warn(`Provided credentials do not match the space ID (DV_APP_ID = ${config.DV_APP_ID}). \n Check the provided DV_TOKEN if this is not intentional.`)
+                }
+
+                usersReg = new DatavillageUsersRegistry(dvClient, config.DV_CLIENT_ID, config.DV_APP_ID);
+            } catch (err)  {
+                throw new util.WrappedError("Failed to setup connection with Datavillage backend at "+config.DV_URL, err);
+            }
+        } else {
+            usersReg = new RedisUsersRegistry(redis)
+        }
 
         // Start the engine
         const engine = await createEngine(usersReg);
