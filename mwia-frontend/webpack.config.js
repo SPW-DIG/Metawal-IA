@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 var path = require('path');
 
@@ -22,6 +23,7 @@ var cssLoader =  'css-loader';
 
 
 module.exports = {
+    // this can be overridden by command line `--mode=production`
     mode: dev ? 'development' : 'production',
     //optimization: { minimize: !dev },
 
@@ -119,5 +121,11 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
+
+        // required to properly bundle all the monaco assets
+        new MonacoWebpackPlugin()
+
+        // this is already activated with production mode
+        //new webpack.optimize.ModuleConcatenationPlugin()
     ]
 };

@@ -6,7 +6,8 @@
     "scripts": {
         "clean": "yarn workspaces run clean",
         "build": "yarn workspaces run build",
-        "start": "yarn workspace mwia-engine run start"
+        "start": "yarn workspace mwia-engine run start",
+        "deploy": "yarn build && yarn workspace @spw-dig/mwia-engine build-docker"
     },
     "keywords": [],
     "author": "philippe@datavillage.me",

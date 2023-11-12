@@ -8,7 +8,8 @@
         "clean": "shx rm -rf dist",
         "prettier": "prettier --write ./src",
         "start": "webpack-dev-server --profile --progress --mode development",
-        "build": "yarn run --silent clean && node --max_old_space_size=4096 node_modules/.bin/webpack"
+        "build": "yarn run --silent clean && node --max_old_space_size=4096 node_modules/.bin/webpack --mode=production --json",
+        "build-dev": "yarn run --silent clean && node --max_old_space_size=4096 node_modules/.bin/webpack --json > stats.json"
     },
     "keywords": [],
     "license": "MIT",
@@ -35,6 +36,7 @@
         "html-webpack-plugin": "5.5.0",
         "json-loader": "^0.5.7",
         "mini-css-extract-plugin": "^2.7.6",
+        "monaco-editor-webpack-plugin": "^7.1.0",
         "node-sass": "8.0.0",
         "npx": "^10.2.2",
         "prettier": "^2.8.2",
@@ -49,7 +51,7 @@
         "webpack-dev-server": "4.11.1"
     },
     "dependencies": {
-        "@datavillage-me/monaco-language-turtle": "^0.0.2",
+        "@datavillage-me/monaco-language-turtle": "^0.0.3",
         "@inrupt/solid-ui-react": "^2.0.0",
         "@material-ui/core": "4.8.1",
         "@spw-dig/mwia-core": "0.0.1",
@@ -65,7 +67,7 @@
         "react-select": "^3.1.0",
         "react-virtualized": "^9.22.2",
         "reactstrap": "^9.1.9",
-        "readable-stream": "^4.3.0",
+        "readable-stream": "^4.4.0",
         "stream-browserify": "^3.0.0"
     },
     "resolutions": {

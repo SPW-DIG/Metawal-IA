@@ -1,8 +1,7 @@
 import * as React from "react";
 import {Button} from "@material-ui/core";
 import {handleHttpPromiseStatus, initMetawalProfile, PROFILE_PATH, _404_undefined} from "@spw-dig/mwia-core";
-import {MonacoEditor} from "../../utils/monaco";
-import {useCallback, useEffect, useState} from "react";
+import {lazy, Suspense, useCallback, useEffect, useState} from "react";
 
 export function Profile(props: { podUrl: string, fetch: typeof fetch }) {
     return <>
@@ -25,11 +24,15 @@ export const ProfileEditor = (props: { profileUrl: string, fetch: typeof fetch }
         return props.fetch(props.profileUrl, {method: 'PUT', body: str});
     }, [props.fetch, props.profileUrl]);
 
+    const MonacoEditor = lazy(() => import('../../utils/monaco').then(module => ({default: module.MonacoEditor})));
+
     return <div>
         Displaying profile at {props.profileUrl}<br/>
         <Button variant="contained" disabled={profileStr == editedStr} color="secondary" onClick={() => saveProfile(editedStr).then(() => {setProfileStr(editedStr)})}>Save</Button>
         <Button variant="contained" color="primary" onClick={() => initMetawalProfile(props.profileUrl, {name: "New User"} , props.fetch, true)}>Reset</Button>
-        <MonacoEditor text={profileStr || ''} language="json" onChange={setEditedStr}/>
+        <Suspense fallback={<div>Loading...</div>}>
+            <MonacoEditor text={profileStr || ''} language="json" onChange={setEditedStr}/>
+        </Suspense>
     </div>
 
 

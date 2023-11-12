@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import * as monaco from 'monaco-editor';
+import { editor as monacoeditor } from 'monaco-editor/esm/vs/editor/editor.api'
 //import './monaco.ttl';
 import "@datavillage-me/monaco-language-turtle";
 import * as rdflib from 'rdflib';
@@ -49,7 +49,7 @@ function parseRdf(str: string) {
 
 export const MonacoEditor = (props: {text: string, onChange?: (newText: string) => void, language?: string}) => {
   const divEl = useRef<HTMLDivElement>(null);
-  let editor: monaco.editor.IStandaloneCodeEditor;
+  let editor: monacoeditor.IStandaloneCodeEditor;
 
   const language = props.language || 'turtle';
 
@@ -57,7 +57,7 @@ export const MonacoEditor = (props: {text: string, onChange?: (newText: string) 
     if (divEl.current) {
 
       editor?.dispose();
-      editor = monaco.editor.create(divEl.current, {
+      editor = monacoeditor.create(divEl.current, {
         //hover: {sticky: false},
         theme: language == 'turtle' ? 'turtleTheme' : undefined,
         value: props.text,
