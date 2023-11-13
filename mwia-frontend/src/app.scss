@@ -1,7 +1,23 @@
+body {
+  margin: 0;
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: #636363;
+  background-color: #f1f1f1;
+}
+
 .mainApp {
   height: 100vh;
   //width: 100%;
   //position: absolute;
+}
+
+.metawal-logo {
+  height: 83px;
+  width: 80px;
+  background: url(https://metawal.wallonie.be/geonetwork/catalog/style/metawal/images/rw-sprite-icons.png) repeat scroll -413px -218px;
+  float: left;
 }
 
 .fill {
@@ -45,4 +61,16 @@
   right: 0;
   margin: 5px;
   overflow: auto;
+}
+
+.navbar {
+  .MuiButton-contained {
+    border-radius: 0;
+   &.active {
+     background-color: #74aec2;
+   }
+    &:hover {
+      background-color: #74aec2;
+    }
+  }
 }

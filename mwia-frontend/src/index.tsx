@@ -9,6 +9,7 @@ import {SearchAndRec} from "./pages/recommandations";
 import {MwiaAuth} from "./auth";
 import {AppNavBar} from "./navbar";
 import {ErrorBoundary} from "./utils/ui-utils";
+import {createTheme, ThemeProvider} from "@mui/material";
 
 
 const routes = [
@@ -20,7 +21,7 @@ const routes = [
     },
     {
         component: SearchAndRec,
-        exact: false,
+        exact: true,
         path: '/search',
         requiresAuth: false
     },
@@ -38,9 +39,20 @@ const routes = [
     }
 ];
 
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#d0e0e6',
+        },
+        secondary: {
+            main: '#00fff0',
+        }
+    }
+});
 
 export const App = () => {
         return (
+            <ThemeProvider theme={theme}>
             <MwiaAuth.SessionProvider>
                 {({session}) => (
                     <HashRouter>
@@ -63,6 +75,7 @@ export const App = () => {
                 )}
 
             </MwiaAuth.SessionProvider>
+            </ThemeProvider>
         );
     }
 ;
