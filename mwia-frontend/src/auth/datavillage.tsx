@@ -227,7 +227,7 @@ const LoginButton = () => {
                     e.stopPropagation()
                 }}
             >
-                {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer}>{prov.label}</MenuItem>)}
+                {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer} onClick={(e) => {e.stopPropagation()}}>{prov.label}</MenuItem>)}
             </Select>
         </Button>
 
