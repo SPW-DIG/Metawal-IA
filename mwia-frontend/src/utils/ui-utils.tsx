@@ -126,6 +126,7 @@ export class ErrorBoundary extends React.PureComponent<ErrorBoundaryProps, Error
     }
 
     componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+        error = error || new Error("Undefined Error : "+errorInfo.componentStack);
         this.setState({error});
         console.warn(error);
     }

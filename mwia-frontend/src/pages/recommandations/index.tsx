@@ -1,15 +1,13 @@
 import * as React from "react";
-import {TextField} from "@material-ui/core";
+import {TextField} from "@mui/material";
 import {useCallback, useState} from "react";
 import {DatasetRecommendation} from "@spw-dig/mwia-core";
-import {getBackendUrl} from "../../config";
-import {Switch as MuiSwitch} from '@material-ui/core';
-import {DEFAULT_AUTH} from '../../auth';
-
-const auth = DEFAULT_AUTH;
+import {Switch as MuiSwitch} from '@mui/material';
+import {MwiaAuth} from "../../auth";
+import {useBackend} from "../../utils/engine";
 
 export const SearchAndRec = () => {
-    const session = auth.useSession();
+    const session = MwiaAuth.useSession();
 
     return (
         <div>
@@ -20,7 +18,7 @@ export const SearchAndRec = () => {
                 <Recommandations/> :
                 <div>
                     Please log in
-                    <auth.LoginButton/>
+                    <MwiaAuth.LoginButton/>
                 </div>
             }
         </div>
@@ -29,20 +27,17 @@ export const SearchAndRec = () => {
 
 export const SearchDatasets = () => {
 
-    const session = auth.useSession();
+    const session = MwiaAuth.useSession();
+    const backend = useBackend();
 
     const [useProfile, setUseProfile] = useState(false);
 
     const [recos, setRecos] = useState<DatasetRecommendation[]>([]);
 
     const search = useCallback(async (searchText: string | undefined | null) => {
-        let recos: DatasetRecommendation[] = [];
-
-        if (searchText) {
-            const resp = await fetch(getBackendUrl("recommandations", {force: true, search: searchText, userId: useProfile ? session.userId : undefined}));
-            recos = (await resp.json()) as DatasetRecommendation[];
-        }
-
+        const recos = searchText ?
+            await backend.search(searchText, useProfile ? session.userId : undefined) :
+            [];
         setRecos(recos);
     }, [useProfile]);
 

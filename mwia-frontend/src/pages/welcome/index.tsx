@@ -1,8 +1,9 @@
 import * as React from "react";
-import {DEFAULT_AUTH} from "../../auth";
+import {MwiaAuth} from "../../auth";
+
 
 export const Welcome = () => {
-    const session = DEFAULT_AUTH.useSession();
+    const session = MwiaAuth.useSession();
 
     //const podUrl$ = usePromiseFn(async () => session.info.webId ? getPodUrls(session.info.webId, {fetch: session.fetch}).then(urls => urls?.length ? urls[0] : undefined) : undefined, [session.fetch, session.info.webId]);
 
@@ -19,7 +20,7 @@ export const Welcome = () => {
                 </div> :
                 <div>
                     Please log in using Solid
-                    <DEFAULT_AUTH.LoginButton/>
+                    <MwiaAuth.LoginButton/>
                 </div>
             }
         </div>

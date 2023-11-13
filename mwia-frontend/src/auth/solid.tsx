@@ -1,11 +1,10 @@
 import {LoginButton, LogoutButton, SessionProvider, useSession as inruptUseSession} from '@inrupt/solid-ui-react';
 import {AuthModule, Session} from "./index";
 import {useEffect, useState} from "react";
-import {Button, MenuItem, Select} from "@material-ui/core";
+import {Button, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import {_404_undefined, getPodUrls, handleHttpPromiseStatus} from "@spw-dig/mwia-core";
-import {getBackendUrl} from "../config";
-
+import {getBackendUrl, useBackend} from "../utils/engine";
 
 const ISSUERS = {
     //"https://openid.sandbox-pod.datanutsbedrijf.be": "DNB Sandbox",
@@ -60,11 +59,15 @@ const useSession = () => {
         if (solidSession.session.info.isLoggedIn && solidSession.session.info.webId) {
             getPodUrls(solidSession.session.info.webId, {fetch: solidSession.fetch}).then(urls => urls[0])
                 .then(async (podUrl) => {
+                    // leave this undefined, meaning the backend is supposed to be sitting at the same URL as this app
+                    const engineApiUrl = undefined;
+
                     //const access = await getPublicAccess(podUrl + SPW_PATH, solidSession.fetch).catch(err => undefined) || undefined;
                     //const idDoc = await solidSession.fetch(solidSession.session.info.webId!, {headers: {'Accept': 'text/turtle'}}).then(resp => resp.text());
-                    const registeredUser = await fetch(getBackendUrl("user", {userUri: solidSession.session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
+                    const registeredUser = await fetch(getBackendUrl(engineApiUrl, "user", {userUri: solidSession.session.info.webId}).toString()).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
 
                     setSession ( {
+                        engineApiUrl: engineApiUrl,
                         isLoggedIn: solidSession.session.info.isLoggedIn,
                         userId: solidSession.session.info.webId,
                         app: registeredUser ? {isRegistered: true, appFolder: 'spw/'} : undefined,
@@ -80,18 +83,15 @@ const useSession = () => {
     return session;
 }
 
-async function registerUser(webId: string, podUrl: string, fetchFn: typeof fetch) {
-    await fetch(getBackendUrl("user/register", {userUri: webId, podUri: podUrl}).toString(),{method: 'POST'});
-}
-
 
 const SubscribeButton = () => {
 
     const session = useSession();
+    const backend = useBackend();
 
     return (
         session.userId ?
-            <Button variant="contained" color="primary" onClick={() => registerUser(session.userId!, session.podUrl!, session.fetch)}>
+            <Button variant="contained" color="primary" onClick={() => backend.registerUser(session.userId!, session.podUrl!)}>
                 Souscrire au service Metawal-IA
             </Button> : <>Not authenticated</>
     );

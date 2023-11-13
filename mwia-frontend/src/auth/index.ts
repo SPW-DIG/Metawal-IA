@@ -5,6 +5,7 @@ export * from './solid';
 export * from './datavillage';
 
 export type Session = {
+    engineApiUrl?: string,
     userId?: string,
     isLoggedIn: boolean,
     podUrl?: string,
@@ -27,4 +28,4 @@ export type AuthModule = {
     SessionProvider: (props: { children: ReactNode | ((props: {session: Session}) => JSX.Element) }) => ReactElement
 }
 
-export const DEFAULT_AUTH: AuthModule = DatavillageAuth;
+export const MwiaAuth: AuthModule = DatavillageAuth;

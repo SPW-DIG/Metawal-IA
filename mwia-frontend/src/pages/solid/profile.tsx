@@ -1,7 +1,8 @@
 import * as React from "react";
-import {Button} from "@material-ui/core";
 import {handleHttpPromiseStatus, initMetawalProfile, PROFILE_PATH, _404_undefined} from "@spw-dig/mwia-core";
 import {lazy, Suspense, useCallback, useEffect, useState} from "react";
+import {Button} from "@mui/material";
+import {ErrorBoundary} from "../../utils/ui-utils";
 
 export function Profile(props: { podUrl: string, fetch: typeof fetch }) {
     return <>
@@ -31,7 +32,9 @@ export const ProfileEditor = (props: { profileUrl: string, fetch: typeof fetch }
         <Button variant="contained" disabled={profileStr == editedStr} color="secondary" onClick={() => saveProfile(editedStr).then(() => {setProfileStr(editedStr)})}>Save</Button>
         <Button variant="contained" color="primary" onClick={() => initMetawalProfile(props.profileUrl, {name: "New User"} , props.fetch, true)}>Reset</Button>
         <Suspense fallback={<div>Loading...</div>}>
-            <MonacoEditor text={profileStr || ''} language="json" onChange={setEditedStr}/>
+            <ErrorBoundary>
+                <MonacoEditor text={profileStr || ''} language="json" onChange={setEditedStr}/>
+            </ErrorBoundary>
         </Suspense>
     </div>
 

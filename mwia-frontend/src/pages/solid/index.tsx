@@ -1,10 +1,10 @@
 import * as React from "react";
-import {Box, Tab, Tabs} from "@material-ui/core";
+import {Box, Tab, Tabs} from "@mui/material";
 import {usePromiseFn} from "../../utils/hooks";
 import { PromiseStateContainer} from "../../utils/ui-utils";
 import {assert} from "@spw-dig/mwia-core";
 import {Profile} from "./profile";
-import {DEFAULT_AUTH} from "../../auth";
+import {MwiaAuth} from "../../auth";
 
 
 async function createTestFile(path: string, content: string, fetchFn: typeof fetch = fetch) {
@@ -45,7 +45,7 @@ function a11yProps(index: number) {
 
 export const SolidDashboard = () => {
 
-    const session = DEFAULT_AUTH.useSession();
+    const session = MwiaAuth.useSession();
 
     assert(session.podUrl);
 
@@ -59,7 +59,7 @@ export const SolidDashboard = () => {
 
     return <div>
         {! session.app?.isRegistered ?
-            <DEFAULT_AUTH.SubscribeButton />
+            <MwiaAuth.SubscribeButton />
  : /*
             !session.accessGranted ? // This should be done already, but in case the pod is in broken state
                     <button onClick={() => initSpwFolder(session.podUrl!, {name: "New User"}, session.fetch)}>

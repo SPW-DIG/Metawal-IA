@@ -1,14 +1,23 @@
 import * as React from 'react';
 import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 
-import {Client, getRemoteClient, httputil, POD_IDENTITY_PROVIDER, UserDetails, UserScopeApplicationWithUserData, util} from "@datavillage-me/api";
+import {
+    Client,
+    getRemoteClient,
+    httputil,
+    POD_IDENTITY_PROVIDER,
+    UserDetails,
+    UserScopeApplicationWithUserData,
+    util
+} from "@datavillage-me/api";
 import {AuthModule, Session} from "./index";
 import {_404_undefined} from "@spw-dig/mwia-core";
-import {Button, MenuItem, Select} from "@material-ui/core";
+import {Button, MenuItem, Select} from "@mui/material";
 
-export type DatavillageAppSettings = {
+export type EngineAppSettings = {
     DV_APP_ID: string,
     DV_CLIENT_ID: string,
+    ENGINE_API_URL?: string,
     DV_SETTINGS: {
         apiUrl: string,
         loginUrl: string,
@@ -18,7 +27,7 @@ export type DatavillageAppSettings = {
 }
 
 export type DatavillageSessionContextType = Session & {
-    settings?: DatavillageAppSettings,
+    settings?: EngineAppSettings,
     currentUser?: UserDetails,
     appMetadata?: UserScopeApplicationWithUserData,
     passportUrl?: string
@@ -27,12 +36,12 @@ export type DatavillageSessionContextType = Session & {
 export const DatavillageSessionContext = createContext<DatavillageSessionContextType>({isLoggedIn: false, fetch});
 
 function DatavillageSessionProvider(props: {
-    children: React.ReactNode | ((props: {session: DatavillageSessionContextType}) => JSX.Element)
+    children: React.ReactNode | ((props: { session: DatavillageSessionContextType }) => JSX.Element)
 }) {
     const [context, setContext] = useState<DatavillageSessionContextType>({isLoggedIn: false, fetch});
 
     useEffect(() => {
-        fetch("./settings.json").catch(_404_undefined).then(str => str ? str.json() as unknown as DatavillageAppSettings : undefined).then(settings => setContext({
+        fetch("./settings.json").catch(_404_undefined).then(str => str ? str.json() as unknown as EngineAppSettings : undefined).then(settings => setContext({
             ...context,
             settings
         }));
@@ -46,19 +55,21 @@ function DatavillageSessionProvider(props: {
                 .then(currentUser => {
                     const authenticatedClient = new httputil.HttpClient(apiUrl, undefined, 'BrowserCredentials');
                     setContext({
-                    ...context,
-                    currentUser,
-                    //podUrl: currentUser && (apiUrl + `users/${currentUser.id}/pods/${MASTER_POD_ALIAS}/resources/`),
-                    podUrl: currentUser && (util.sanitizePath(apiUrl, 'SLASH') + `collaborationSpaces/${context.settings?.DV_APP_ID}/users/${currentUser.id}/appdata/`),
-                    fetch: (input, init) => {
-                        if (typeof input != 'string') {
-                            throw new Error('fetch on non-string URL not supported');
-                        }
-                        return authenticatedClient.authorizedFetch(input, init, true)
-                    },
-                    userId: currentUser?.id,
-                    isLoggedIn: !!currentUser?.id
-                })}).catch(err => {
+                        ...context,
+                        currentUser,
+                        //podUrl: currentUser && (apiUrl + `users/${currentUser.id}/pods/${MASTER_POD_ALIAS}/resources/`),
+                        podUrl: currentUser && (util.sanitizePath(apiUrl, 'SLASH') + `collaborationSpaces/${context.settings?.DV_APP_ID}/users/${currentUser.id}/appdata/`),
+                        fetch: (input, init) => {
+                            if (typeof input != 'string') {
+                                throw new Error('fetch on non-string URL not supported');
+                            }
+                            return authenticatedClient.authorizedFetch(input, init, true)
+                        },
+                        userId: currentUser?.id,
+                        isLoggedIn: !!currentUser?.id,
+                        engineApiUrl: context.settings?.ENGINE_API_URL
+                    })
+                }).catch(err => {
                 console.warn(`Auth failed: ${err}`);
                 setContext({...context, currentUser: undefined})
             })
@@ -190,8 +201,8 @@ async function handleProviderAuth(
 }
 
 
-const AUTH_PROVIDERS: {label: string, type: POD_IDENTITY_PROVIDER, issuer?: string}[] = [
-    {label: 'Google Drive', type: POD_IDENTITY_PROVIDER.Google, issuer:'https://drive.google.com'},
+const AUTH_PROVIDERS: { label: string, type: POD_IDENTITY_PROVIDER, issuer?: string }[] = [
+    {label: 'Google Drive', type: POD_IDENTITY_PROVIDER.Google, issuer: 'https://drive.google.com'},
     {label: 'Inrupt.net', type: POD_IDENTITY_PROVIDER.Solid, issuer: 'https://inrupt.net'},
     {label: 'Solid Community', type: POD_IDENTITY_PROVIDER.Solid, issuer: 'https://solidcommunity.net/'},
     {label: 'Inrupt Pod Spaces', type: POD_IDENTITY_PROVIDER.Solid, issuer: 'https://login.inrupt.com/'},
@@ -206,18 +217,19 @@ const LoginButton = () => {
     const [provider, setProvider] = useState<typeof AUTH_PROVIDERS[0]>(AUTH_PROVIDERS[0]);
 
     return (
-            <Button variant="contained" color="primary" onClick={() => client && handleProviderAuth(client, '', provider.type, provider.issuer)}>
-                Log in with&nbsp;
-                <Select
-                    value={provider}
-                    onChange={(e) => {
-                        setProvider(AUTH_PROVIDERS.find(p => p.issuer == e.target.value) || AUTH_PROVIDERS[0]);
-                        e.stopPropagation()
-                    }}
-                >
-                    {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer}>{prov.label}</MenuItem>)}
-                </Select>
-            </Button>
+        <Button variant="contained" color="primary"
+                onClick={() => client && handleProviderAuth(client, '', provider.type, provider.issuer)}>
+            Log in with&nbsp;
+            <Select
+                value={provider.issuer}
+                onChange={(e) => {
+                    setProvider(AUTH_PROVIDERS.find(p => p.issuer == e.target.value) || AUTH_PROVIDERS[0]);
+                    e.stopPropagation()
+                }}
+            >
+                {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer}>{prov.label}</MenuItem>)}
+            </Select>
+        </Button>
 
     );
 };
@@ -229,9 +241,9 @@ const LogoutButton = () => {
 
     return (
         client ?
-        <Button variant="contained" color="primary" onClick={() => client?.getPassport().logout()}>
-            Logout
-        </Button> : <>Not authenticated</>
+            <Button variant="contained" color="primary" onClick={() => client?.getPassport().logout()}>
+                Logout
+            </Button> : <>Not authenticated</>
     );
 };
 
@@ -240,9 +252,10 @@ const SubscribeButton = () => {
     const sessionContext = useContext(DatavillageSessionContext);
 
     return (
-            <Button variant="contained" color="primary" onClick={() => window.location.href = `${sessionContext.passportUrl}/?clientId=${sessionContext.settings?.DV_CLIENT_ID}&applicationId=${sessionContext.settings?.DV_APP_ID}`}>
-                Souscrire au service Metawal-IA
-            </Button>
+        <Button variant="contained" color="primary"
+                onClick={() => window.location.href = `${sessionContext.passportUrl}/?clientId=${sessionContext.settings?.DV_CLIENT_ID}&applicationId=${sessionContext.settings?.DV_APP_ID}`}>
+            Souscrire au service Metawal-IA
+        </Button>
     );
 };
 

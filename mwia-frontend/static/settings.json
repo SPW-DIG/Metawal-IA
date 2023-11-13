@@ -1,5 +1,11 @@
 {
   "DV_APP_ID": "iaajmgoj",
   "DV_CLIENT_ID": "64635243d5dba7daa7c65be0",
-  "DV_URL": "http://localhost:3050/"
+  "ENGINE_API_URL": "http://localhost:5000",
+  "DV_SETTINGS": {
+    "apiUrl": "http://localhost:3050",
+    "loginUrl": "/login.html",
+    "passportUrl": "http://localhost:4000/passport",
+    "consoleUrl": "http://localhost:5000"
+  }
 }
