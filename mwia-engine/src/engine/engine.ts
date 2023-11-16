@@ -67,7 +67,7 @@ export class RecommandationEngine {
             }
 
             mark = new Date().getTime();
-            const results = this.graph.searchDatasets({terms: searchTerms, userId});
+            const results = await this.graph.searchDatasets({terms: searchTerms, userId});
             console.log(`[PERF] Reco Search : ${new Date().getTime()-mark}`);
             return results;
         } else {
