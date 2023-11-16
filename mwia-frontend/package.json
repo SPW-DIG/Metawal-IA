@@ -52,6 +52,7 @@
     },
     "dependencies": {
         "@datavillage-me/monaco-language-turtle": "^0.0.3",
+        "@datavillage-me/dv-common-ui": "^0.0.9",
         "@inrupt/solid-ui-react": "^2.0.0",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",

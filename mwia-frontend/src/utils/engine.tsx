@@ -31,6 +31,12 @@ export function useBackend() {
             syncCatalog: async () => {
                 const url = getBackendUrl(engineApiUrl, "admin/graph/sync");
                 const resp = await fetch(url, {method: 'POST'});
+                return resp.json() as Promise<{added: number, time: number}>;
+            },
+
+            reset: async () => {
+                const url = getBackendUrl(engineApiUrl, "admin/graph/reset");
+                const resp = await fetch(url, {method: 'POST'});
                 return resp.text();
             },
 

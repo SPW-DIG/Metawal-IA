@@ -22,10 +22,19 @@ export const AdminRouter = () => {
     router.post('/graph/sync', async (req: Request<void, any, void, void>, res) => {
         const engine = getRecoEngine(req.app);
 
+        const time = new Date().getTime();
         // TODO
         const count = await engine.syncCatalog();
 
-        res.json({added: count})
+        res.json({added: count, time: new Date().getTime() - time})
+    });
+
+    router.post('/graph/reset', async (req: Request<void, any, void, void>, res) => {
+        const engine = getRecoEngine(req.app);
+
+        const result = await engine.reset();
+
+        res.send(result);
     });
 
     return router;
