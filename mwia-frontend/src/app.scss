@@ -74,3 +74,23 @@ body {
     }
   }
 }
+
+
+[class^='cause-'], div[class*=' cause-'] {
+  border: 1px solid #606060;
+  border-radius: 4px;
+  font-size: 80%;
+  padding: 2px;
+
+  &.cause-resource {
+    background-color: #c1e6f3;
+  }
+
+  &.cause-concept {
+    background-color: #ddf5d5;
+  }
+
+  &.cause-fulltext {
+    background-color: #ece7a8;
+  }
+}
