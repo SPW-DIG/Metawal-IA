@@ -143,7 +143,8 @@ export default commandLineArgs => {
                         { src: './static/*', dest: 'dist/standalone/static' },
                         { src: '../yarn.lock', dest: 'dist/standalone' },
                         { src: '../mwia-frontend/dist/*', dest: 'dist/standalone/static' },
-                        { src: './src/samples/records-metawal.rdf', dest: 'dist/standalone' }
+                        { src: './src/samples/records-metawal.rdf', dest: 'dist/standalone' },
+                        { src: './src/samples/metawal_csw_dcat_prod_fixed.rdf', dest: 'dist/standalone' }
                     ]
                 }),
                 typescript(

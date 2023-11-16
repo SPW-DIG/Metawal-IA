@@ -34,9 +34,11 @@ export class DummyCatalogClient implements CatalogClient {
 
     async getRecords<F extends string>(collection: string, start: number = 0, limit: number = 0, format: F = 'dcat' as F): Promise<F extends 'json' ? any : string>  {
         if (format == 'dcat') {
-            const ttlStr = fs.readFileSync('./records-metawal.rdf');
+            //const ttlStr = fs.readFileSync('./records-metawal.rdf');
+            const ttlStr = fs.readFileSync('./metawal_csw_dcat_prod_fixed.rdf');
             //const ttlStr = fs.readFileSync('./src/samples/records-metawal.rdf');
             //const ttlStr = fs.readFileSync('./src/samples/metawal_csw_dcat.rdf');
+            //const ttlStr = fs.readFileSync('./src/samples/metawal_csw_dcat_prod_fixed.rdf');
             return Promise.resolve(ttlStr.toString());
         } else
             throw new Error("Not supported");
