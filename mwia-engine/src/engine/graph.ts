@@ -2,8 +2,12 @@ import {Graph, RedisClientType} from "redis";
 import {Literal, Namespace, Statement, Store} from 'rdflib';
 import ClassOrder from 'rdflib/lib/class-order';
 import * as rdflib from "rdflib";
-import {DatasetRecommendation, PersonalProfile} from "@spw-dig/mwia-core";
-import {fulltextSearch, fulltextSearchAndUser} from "./cypherQueries";
+import {Cause, DatasetRecommendation, PersonalProfile} from "@spw-dig/mwia-core";
+import {
+    conceptProximityResources, fulltextResources,
+    fulltextSearch,
+    userProximityResources
+} from "./cypherQueries";
 
 var FOAF = Namespace("http://xmlns.com/foaf/0.1/");
 
@@ -34,7 +38,7 @@ export const INLINE_OBJ_PROPS = [
 
 export type DatasetGraphNode = { id: number, labels: string[], properties: {uri: string /* , ... */} & any};
 
-export type SearchResultNode = { id: string, uri: string, title: string, score: number};
+export type SearchResultNode = { id: string, uri: string, title: string, score: number, causes?: Cause[]};
 
 export const DATE_TYPES = ['http://www.w3.org/2001/XMLSchema#date'];
 
@@ -93,13 +97,18 @@ export class KnowledgeGraph {
     }
 
     async reset() {
-        return this.redisClient.graph.delete(this.graphName).catch(err => {
+        const result = await this.redisClient.graph.delete(this.graphName).catch(err => {
             if (err.toString().indexOf('Invalid graph operation on empty key') >= 0) {
                 // ignore
             } else {
                 throw err;
             }
         });
+
+        // make sure the full text indices are recreated
+        await this.init();
+
+        return result;
     }
 
     async loadGraph(store: Store) {
@@ -113,11 +122,18 @@ export class KnowledgeGraph {
             const statements = statementsBySubject[subject] as unknown as rdflib.Statement[];
 
             if (statements.length) {
+                //console.debug(`Adding ${statements.length} statements for ${statements[0].subject.value}`)
                 const res = await this.addSubjectStatements(statements[0].subject.value, statements, store.namespaces, object2recordMap);
                 count++;
                 res;
+
+                if (count % 1000 == 0)
+                    console.debug(`Added statements for ${count} subjects...`);
             }
         }
+
+        // this action is necessary to fix some bad relationships in the current metawal dump
+        await this.cleanUp();
 
         return count;
     }
@@ -203,19 +219,24 @@ export class KnowledgeGraph {
 
     async loadUserProfile(profile: PersonalProfile) {
         let mergeQuery = `
+        OPTIONAL MATCH (:User {uri:'${profile.uri}'}) -[r:hasBrowsed]- ()
+        DELETE r
         MERGE (user:User {uri:'${profile.uri}'})
         `;
 
-        const browseMerges = profile.browseHistory.map(item =>  `
-        MATCH (res:\`dcat:Resource\` {uri:'${item.datasetUri}'})
-        MERGE (user)-[:hasBrowsed]->(res)`
-        ).join('\n')
+        const params: Record<string, any> = {};
 
-       if (browseMerges) mergeQuery += 'WITH user \n' + browseMerges;
+        if (profile.browseHistory.length) {
+            params['datasetUris'] = profile.browseHistory.map(h => h.datasetUri);
+            mergeQuery += `
+        WITH user
+        MATCH (res:\`dcat:Resource\`) WHERE res.uri IN $datasetUris
+        MERGE (user)-[:hasBrowsed]->(res)`;
+        }
 
         console.log(`CYPHER QUERY - LOAD USER: ${mergeQuery}`);
 
-        return this.redisGraph.query(mergeQuery).catch(err => {
+        return this.redisGraph.query(mergeQuery, {params}).catch(err => {
             console.warn(`Cypher query failed : ${err} \n>>> ${mergeQuery}`);
             throw err;
         });
@@ -239,12 +260,50 @@ export class KnowledgeGraph {
         return this.redisGraph.query(deleteQuery);
     }
 
+    async queryGraph<T>(cypher_query: string) {
+        console.log(`CYPHER QUERY - ${cypher_query}`);
+        const result = await this.redisGraph.query<T>(cypher_query);
+        console.log(`CYPHER QUERY RESULTS - ${result.data?.length}`);
+
+        return result;
+    }
+
     async searchDatasets(query: SearchQuery): Promise<DatasetRecommendation[]> {
-        let cypher_query;
-        if (query.terms && query.userId) {
-            cypher_query = fulltextSearchAndUser(deaccent(query.terms.join(' ')), query.userId, undefined, query.limit);
-        } else if (query.terms) {
-            cypher_query = fulltextSearch(deaccent(query.terms.join(' ')), undefined, query.limit);
+
+        const textSearchString = query.terms && deaccent(query.terms.join(' '));
+
+        let result: SearchResultNode[];
+
+        if (textSearchString && query.userId) {
+
+            // TODO to properly implement a join query like this one, one should use the Cypher subquery functionality
+            //      however this is not yet avbailable in redisgraph (cf https://forum.redis.com/t/support-for-call-subquery/2294)
+            //      while it is available in neo4j
+            //      in the mean time, the query is deconstructed, and reassembled here.
+            //      This is less efficient, but acceptable cinsidered the nnumber of elements in the DB
+            //const cypher_query = fulltextSearchAndUser(textSearchString, query.userId, undefined, query.limit);
+
+            const summedResults = await Promise.all([
+                this.queryGraph<SearchResultNode>(userProximityResources(query.userId, undefined, query.limit)),
+                this.queryGraph<SearchResultNode>(conceptProximityResources(textSearchString, undefined, query.limit)),
+                this.queryGraph<SearchResultNode>(fulltextResources(textSearchString, undefined, query.limit))
+            ]).then(results => results.reduce(
+                (result: Record<string, SearchResultNode>, current) => {
+                current.data?.forEach(d => {
+                    if (result[d.id]) {
+                        result[d.id].score+=d.score;
+                        result[d.id].causes && d.causes && result[d.id].causes!.push(...d.causes);
+                    }
+                    else result[d.id] = d
+                });
+                return result;
+            }, {} as Record<string, SearchResultNode>))
+
+            result = Object.values(summedResults).sort((r1, r2) => (r2.score - r1.score));
+        } else if (textSearchString) {
+            const cypher_query = fulltextSearch(textSearchString, undefined, query.limit);
+
+            result = (await this.queryGraph<SearchResultNode>(cypher_query)).data || [];
         } else if (query.userId) {
             return [];
         } else {
@@ -252,18 +311,15 @@ export class KnowledgeGraph {
             return [];
         }
 
-        console.log(`CYPHER QUERY - SEARCH: ${cypher_query}`);
-
-        const reply = await this.redisGraph.query<SearchResultNode>(cypher_query);
-
-        return reply.data ? reply.data.map((node) => ({
+        return result.map((node) => ({
             datasetUri: node.uri,
             id: node.id,
             score: node.score,
             timestamp: new Date().getTime(),
             title: node.title,
+            causes: node.causes
             //id: node.properties['http://purl.org/dc/terms/identifier'][0],
-        })) : []
+        }));
 
     }
 
