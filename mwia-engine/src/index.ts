@@ -15,6 +15,7 @@ import dotenv from 'dotenv';
 import {RedisClientOptions} from "@redis/client";
 import {DatavillageUsersRegistry} from "./users/datavillage";
 import { RedisUsersRegistry } from "./users/redis";
+import log4js from 'log4js';
 
 const originalWarn = console.warn;
 console.warn = (msg, ...params) => originalWarn(`\x1b[33m${msg}\x1b[0m`, ...params)
@@ -22,8 +23,20 @@ const originalError = console.error;
 console.error = (msg, ...params) => originalError(`\x1b[31m${msg}\x1b[0m`, ...params)
 const originalDebug = console.debug;
 console.debug = (msg, ...params) => originalDebug(`\x1b[90m${msg}\x1b[0m`, ...params)
+const originalInfo = console.info;
+console.info = (msg, ...params) => originalInfo(`\x1b[34m${msg}\x1b[0m`, ...params)
 
 dotenv.config();
+
+log4js.configure({
+    appenders: {
+        //serverLogs: { type: 'file', filename: 'metawal-engine.log' },
+        console: { type: 'console' }
+    },
+    categories: {
+        default: { appenders: ['console'], level: 'debug' }
+    }
+});
 
 const config = {
     DV_TOKEN: process.env.DV_TOKEN,
@@ -142,7 +155,7 @@ redis.connect()
     })
     .then(async () => {
         console.log('Connected to Redis');
-        //console.log(await redis.INFO());
+        console.log((await redis.INFO()));
 
         let usersReg: UsersRegistry;
         if (config.DV_URL && config.DV_TOKEN && config.DV_CLIENT_ID && config.DV_APP_ID) {
@@ -162,6 +175,12 @@ redis.connect()
                 console.log(`DV Public API URL  ${serverSettings.DV_SETTINGS.apiUrl}`);
                 console.log(`DV Passport URL    ${serverSettings.DV_SETTINGS.passportUrl}`);
                 console.log(`DV Console URL     ${serverSettings.DV_SETTINGS.consoleUrl}`);
+                const podStatus = await dvClient.getCollaborationSpacesServices().getOperatorServices(config.DV_APP_ID).getPodStatus();
+                const algoPod = podStatus.find(p => p.name.startsWith('algo-'));
+                console.log(`Pod Identifier     ${algoPod?.namespace} / ${algoPod?.name}`);
+                console.log(`Docker  image      ${algoPod?.imageId}`);
+                console.info(`Proxy to redis using `);
+                console.info(`$> kubectl port-forward redis-0 6379:6379 -n ${algoPod?.namespace} `);
 
                 // check the connectivity to the DV backend and the validity of the credentials
                 const credentials = await dvClient.getPassport().getCurrentCredentials().catch(err => {
