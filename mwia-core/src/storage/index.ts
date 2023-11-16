@@ -53,7 +53,12 @@ export async function initSpwFolder(folderUrl: string, contactInfo: ContactInfo,
 
 export async function initMetawalProfile(profileUrl: string, contactInfo: ContactInfo, fetchFn: typeof fetch = fetch, reset?:boolean) {
 
-    const profile = await fetchFn(profileUrl).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined);
+    const profile = await fetchFn(profileUrl).then(handleHttpPromiseStatus).then(resp => resp.json()).catch(_404_undefined).catch(err => {
+        console.warn("Failed to parse profile : "+err);
+        if (reset)
+            return undefined;
+        else throw err;
+    });
 
     if (!profile || reset) {
         const newProfile = createEmptyProfile(contactInfo);
