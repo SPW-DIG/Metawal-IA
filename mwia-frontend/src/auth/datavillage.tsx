@@ -73,6 +73,7 @@ function DatavillageSessionProvider(props: {
                             return authenticatedClient.authorizedFetch(input, init, true)
                         },
                         userId: currentUser?.id,
+                        displayName: currentUser && (currentUser.identities[0].displayName || currentUser.identities[0].name || currentUser.identities[0].userName || currentUser.identities[0].id),
                         isLoggedIn: !!currentUser?.id,
                         engineApiUrl: context.settings?.ENGINE_API_URL
                     })
