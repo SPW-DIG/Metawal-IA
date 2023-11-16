@@ -155,7 +155,7 @@ redis.connect()
     })
     .then(async () => {
         console.log('Connected to Redis');
-        console.log((await redis.INFO()));
+        //console.log((await redis.INFO()));
 
         let usersReg: UsersRegistry;
         if (config.DV_URL && config.DV_TOKEN && config.DV_CLIENT_ID && config.DV_APP_ID) {
