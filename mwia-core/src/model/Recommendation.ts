@@ -17,4 +17,20 @@ export type DatasetRecommendation = {
 
   /** Score */
   score: number,
+
+  /** the explanation of the recommandation */
+  causes?: Cause[]
+}
+
+export type Cause = {
+  type: 'FULLTEXT'
+} | {
+  type: 'concept',
+  uri: string,
+  title: string
+} | {
+  type: 'resource',
+      uri: string,
+      id: string,
+      title: string
 }
