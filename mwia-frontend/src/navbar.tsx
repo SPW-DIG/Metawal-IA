@@ -32,7 +32,7 @@ export const AppNavBar = () => {
                 <Box sx={{flexGrow: 0, float: 'right'}}>
                     {session.isLoggedIn ? (
                         <div style={{display: 'flex', flexDirection: 'row'}}>
-                            <Button component={Link} to="/user" variant="contained">{session.userId}</Button>
+                            <Button component={Link} to="/user" variant="contained">{session.displayName || session.userId}</Button>
                             <MwiaAuth.LogoutButton>
                                 <Button variant="contained" color="primary">
                                     Log&nbsp;out

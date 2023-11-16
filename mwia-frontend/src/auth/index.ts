@@ -7,6 +7,7 @@ export * from './datavillage';
 export type Session = {
     engineApiUrl?: string,
     userId?: string,
+    displayName?: string,
     isLoggedIn: boolean,
     podUrl?: string,
     fetch: typeof fetch,

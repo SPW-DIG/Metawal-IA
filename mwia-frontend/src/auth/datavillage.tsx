@@ -30,19 +30,27 @@ export type DatavillageSessionContextType = Session & {
     settings?: EngineAppSettings,
     currentUser?: UserDetails,
     appMetadata?: UserScopeApplicationWithUserData,
-    passportUrl?: string
+    passportUrl?: string,
+    updateContext: (update: Partial<DatavillageSessionContextType>) => void
 };
 
-export const DatavillageSessionContext = createContext<DatavillageSessionContextType>({isLoggedIn: false, fetch});
+export const DatavillageSessionContext = createContext<DatavillageSessionContextType>({
+    isLoggedIn: false,
+    fetch,
+    updateContext: () => undefined
+});
 
 function DatavillageSessionProvider(props: {
     children: React.ReactNode | ((props: { session: DatavillageSessionContextType }) => JSX.Element)
 }) {
-    const [context, setContext] = useState<DatavillageSessionContextType>({isLoggedIn: false, fetch});
+    const [context, setContext] = useState<DatavillageSessionContextType>({
+        isLoggedIn: false,
+        fetch,
+        updateContext: (update) => setContext((prevContext) => ({...prevContext, ...update}))
+    });
 
     useEffect(() => {
-        fetch("./settings.json").catch(_404_undefined).then(str => str ? str.json() as unknown as EngineAppSettings : undefined).then(settings => setContext({
-            ...context,
+        fetch("./settings.json").catch(_404_undefined).then(str => str ? str.json() as unknown as EngineAppSettings : undefined).then(settings => context.updateContext({
             settings
         }));
     }, []);
@@ -54,8 +62,7 @@ function DatavillageSessionProvider(props: {
             client.getPassport().getCurrentUser()
                 .then(currentUser => {
                     const authenticatedClient = new httputil.HttpClient(apiUrl, undefined, 'BrowserCredentials');
-                    setContext({
-                        ...context,
+                    context.updateContext({
                         currentUser,
                         //podUrl: currentUser && (apiUrl + `users/${currentUser.id}/pods/${MASTER_POD_ALIAS}/resources/`),
                         podUrl: currentUser && (util.sanitizePath(apiUrl, 'SLASH') + `collaborationSpaces/${context.settings?.DV_APP_ID}/users/${currentUser.id}/appdata/`),
@@ -77,6 +84,32 @@ function DatavillageSessionProvider(props: {
 
     }, [context.settings]);
 
+
+    /*
+        useEffect(() => {
+            if (context.settings && context.currentUser) {
+                const currentUser = context.currentUser;
+                const authenticatedClient = new httputil.HttpClient(context.settings.DV_SETTINGS.apiUrl, undefined, 'BrowserCredentials');
+                context.updateContext({
+                    //podUrl: currentUser && (apiUrl + `users/${currentUser.id}/pods/${MASTER_POD_ALIAS}/resources/`),
+                    podUrl: currentUser && (util.sanitizePath(context.settings.DV_SETTINGS.apiUrl, 'SLASH') + `collaborationSpaces/${context.settings?.DV_APP_ID}/users/${currentUser.id}/appdata/`),
+                    fetch: (input, init) => {
+                        if (typeof input != 'string') {
+                            throw new Error('fetch on non-string URL not supported');
+                        }
+                        return authenticatedClient.authorizedFetch(input, init, true)
+                    },
+                    userId: currentUser?.id,
+                    isLoggedIn: !!currentUser?.id,
+                })
+            }
+
+        }, [context.currentUser, context.settings]);
+
+
+     */
+
+
     useEffect(() => {
         if (context.settings && context.currentUser) {
             const settings = context.settings;
@@ -87,8 +120,7 @@ function DatavillageSessionProvider(props: {
                 const appMetadata = apps.find(app => app.id == settings.DV_APP_ID);
                 util.assert(appMetadata, `User ${context.currentUser?.id} not registered for app ${settings.DV_APP_ID}`);
 
-                setContext({
-                    ...context,
+                context.updateContext({
                     appMetadata: appMetadata,
                     app: {
                         isRegistered: !!appMetadata.userData?.activeConsentId,
@@ -99,7 +131,7 @@ function DatavillageSessionProvider(props: {
                 });
             })
         } else {
-            setContext({...context, app: {isRegistered: false}})
+            context.updateContext({app: {isRegistered: false}})
         }
     }, [context.settings, context.currentUser?.id]);
 
@@ -227,7 +259,9 @@ const LoginButton = () => {
                     e.stopPropagation()
                 }}
             >
-                {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer} onClick={(e) => {e.stopPropagation()}}>{prov.label}</MenuItem>)}
+                {AUTH_PROVIDERS.map(prov => <MenuItem value={prov.issuer} key={prov.issuer} onClick={(e) => {
+                    e.stopPropagation()
+                }}>{prov.label}</MenuItem>)}
             </Select>
         </Button>
 
@@ -238,10 +272,17 @@ const LoginButton = () => {
 const LogoutButton = () => {
 
     const client = useRemoteClient();
+    const sessionContext = useContext(DatavillageSessionContext);
 
     return (
         client ?
-            <Button variant="contained" color="primary" onClick={() => client?.getPassport().logout()}>
+            <Button variant="contained" color="primary"
+                    onClick={() => client?.getPassport().logout().then(() => sessionContext.updateContext({
+                        currentUser: undefined,
+                        podUrl: undefined,
+                        userId: undefined,
+                        isLoggedIn: false,
+                    }))}>
                 Logout
             </Button> : <>Not authenticated</>
     );
